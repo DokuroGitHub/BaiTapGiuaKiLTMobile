@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NoteManagementSystem</string>
+    <string name="app_name_dashBoard">Dashboard Form</string>
 </resources>
