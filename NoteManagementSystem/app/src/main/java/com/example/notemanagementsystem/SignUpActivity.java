@@ -1,6 +1,7 @@
 package com.example.notemanagementsystem;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,10 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.notemanagementsystem.Data.UserDAO;
+import com.example.notemanagementsystem.Data.UserDatabase;
+import com.example.notemanagementsystem.Model.User;
+
 public class SignUpActivity extends AppCompatActivity {
     private EditText edtEmail, edtPassword, edtConfirmPassword;
     private Button btnSignIn,btnSignUp;
-    DBHelper db;
+    private UserDAO userDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +27,7 @@ public class SignUpActivity extends AppCompatActivity {
         edtEmail = (EditText) findViewById(R.id.edtEmail);
         edtPassword = (EditText) findViewById(R.id.edtPassword);
         edtConfirmPassword = (EditText) findViewById(R.id.edtConfirmPassword);
-        db = new DBHelper(this);
+
 
         btnSignIn = (Button) findViewById(R.id.btnSignIn);
         btnSignIn.setOnClickListener(new View.OnClickListener() {
@@ -33,6 +38,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+        userDAO = Room.databaseBuilder(this, UserDatabase.class,"User").allowMainThreadQueries().build().getUserDAO();
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,17 +51,9 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(SignUpActivity.this,"Please enter all the fields",Toast.LENGTH_SHORT).show();
                 else {
                     if(password.equals(rePassword)){
-                        Boolean checkEmail = db.checkEmail(email);
-                        if(checkEmail == false){
-                            Boolean insertData = db.insertData(email,password);
-                            if(insertData == true){
-                                Toast.makeText(SignUpActivity.this,"Register successfully",Toast.LENGTH_SHORT).show();
-                            }else {
-                                Toast.makeText(SignUpActivity.this,"Register failed",Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(SignUpActivity.this,"User already exist",Toast.LENGTH_SHORT).show();
-                        }
+                        User user = new User(email,password);
+                        userDAO.insert(user);
+                        Toast.makeText(SignUpActivity.this,"Create account successfully",Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(SignUpActivity.this,"Password not matching",Toast.LENGTH_SHORT).show();
                     }
