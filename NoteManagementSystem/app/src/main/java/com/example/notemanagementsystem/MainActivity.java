@@ -69,3 +69,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 }
+//
+// user = (User) getIntent().getSerializableExtra("User");
+//         tvUser = (TextView)findViewById(R.id.tvUser);
+//
+//         if(user != null){
+//         tvUser.setText(user.getEmail());
+//         }

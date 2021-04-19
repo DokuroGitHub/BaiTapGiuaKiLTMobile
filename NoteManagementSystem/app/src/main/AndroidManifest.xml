@@ -10,11 +10,11 @@
         android:theme="@style/Theme.NoteManagementSystem">
         <activity
             android:name=".DashboardActivity"
-            android:label="@string/app_name_dashBoard">
-        </activity>
+            android:label="@string/title_activity_dashboard"
+            android:theme="@style/Theme.NoteManagementSystem.NoActionBar"></activity>
         <activity
             android:name=".SignUpActivity"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
