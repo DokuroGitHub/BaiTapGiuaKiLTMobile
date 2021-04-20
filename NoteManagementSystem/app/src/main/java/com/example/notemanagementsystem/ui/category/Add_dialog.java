@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,6 +36,7 @@ public class Add_dialog extends AppCompatDialogFragment {
     private List<Category> mListCategory;
     private CategoryDAO categoryDAO;
     private RecyclerView rcv_Category;
+    private CategoryModel categoryModel;
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -59,13 +61,9 @@ public class Add_dialog extends AppCompatDialogFragment {
                 }
                 categoryDAO = NoteManagementDatabase.getInstance(v.getContext()).getCategoryDAO();
                 Category category = new Category(strCategoryName,strCreateDate);
-                categoryDAO.insert(category);
+                categoryModel = new ViewModelProvider(getActivity()).get(CategoryModel.class);
+                categoryModel.insertCategory(category);
                 Toast.makeText(v.getContext(),"Create category successfully",Toast.LENGTH_SHORT).show();
-                //show data
-                categoryAdapter = new CategoryAdapter();
-                mListCategory = new ArrayList<>();
-                mListCategory = NoteManagementDatabase.getInstance(v.getContext()).getCategoryDAO().getListCategory();
-                categoryAdapter.setData(mListCategory);
                 dismiss();
 
             }
