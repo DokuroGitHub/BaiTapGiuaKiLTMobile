@@ -1,7 +1,6 @@
 package com.example.notemanagementsystem;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.notemanagementsystem.Data.NoteManagementDatabase;
 import com.example.notemanagementsystem.Data.UserDAO;
-import com.example.notemanagementsystem.Data.UserDatabase;
 import com.example.notemanagementsystem.Model.User;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -38,7 +37,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        userDAO = Room.databaseBuilder(this, UserDatabase.class,"User").allowMainThreadQueries().build().getUserDAO();
+        userDAO = NoteManagementDatabase.getInstance(this).getUserDAO();
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override

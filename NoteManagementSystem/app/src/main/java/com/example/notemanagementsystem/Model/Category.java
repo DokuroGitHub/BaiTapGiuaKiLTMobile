@@ -1,22 +1,23 @@
 package com.example.notemanagementsystem.Model;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverter;
 
 import java.io.Serializable;
 import java.util.Date;
 
-;
-
+@Entity
 public class Category implements Serializable {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     private int id;
-    private String name;
-    private Date createDate;
+    private String categoryName;
+    private String createDate;
 
-    public Category(String name, Date createDate) {
-        this.name = name;
+    public Category(String categoryName, String createDate) {
+        this.categoryName = categoryName;
         this.createDate = createDate;
     }
 
@@ -28,19 +29,20 @@ public class Category implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public Date getCreateDate() {
+    public String getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
 }
+
