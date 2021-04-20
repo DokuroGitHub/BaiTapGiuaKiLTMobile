@@ -22,6 +22,4 @@ public class Add_dialog extends AppCompatDialogFragment {
         builder.setView(view);
         return builder.create();
     }
-
-
 }

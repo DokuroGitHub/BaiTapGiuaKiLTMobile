@@ -16,13 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.notemanagementsystem.Adapter.CategoryAdapter;
 import com.example.notemanagementsystem.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class CategoryFragment extends Fragment {
 
     private CategoryModel categoryModel;
     private RecyclerView rcv_Category;
     private CategoryAdapter categoryAdapter;
-    private Button btnNewCategory;
+    private FloatingActionButton btnNewCategory;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class CategoryFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_category, container, false);
         //init UI
         rcv_Category = (RecyclerView) root.findViewById(R.id.rcv_category);
-        btnNewCategory = (Button) root.findViewById(R.id.btnNewCategory);
+        btnNewCategory = (FloatingActionButton) root.findViewById(R.id.btnNewCategory);
         btnNewCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
