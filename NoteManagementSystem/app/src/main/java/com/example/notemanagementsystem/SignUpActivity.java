@@ -56,9 +56,7 @@ public class SignUpActivity extends AppCompatActivity {
                     } else {
                         Toast.makeText(SignUpActivity.this,"Password not matching",Toast.LENGTH_SHORT).show();
                     }
-
                 }
-
             }
         });
     }
