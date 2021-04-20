@@ -1,19 +1,34 @@
 package com.example.notemanagementsystem.ui.category;
 
+
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import com.example.notemanagementsystem.Model.Category;
+import com.example.notemanagementsystem.Repository.CategoryRepository;
 
-public class CategoryModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+import java.util.List;
 
-    public CategoryModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is category fragment");
+public class CategoryModel extends AndroidViewModel {
+    private CategoryRepository categoryRepository;
+    LiveData<List<Category>> mListCategory;
+
+    public CategoryModel(@NonNull Application application){
+        super(application);
+        categoryRepository = new CategoryRepository(application);
+        mListCategory = categoryRepository.getListCategory();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<List<Category>> getListCategory(){
+        return categoryRepository.getListCategory();
     }
+
+    public void insertCategory(Category category){
+        categoryRepository.insertCategory(category);
+    }
+
 }

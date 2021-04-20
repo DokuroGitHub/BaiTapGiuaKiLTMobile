@@ -14,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +22,7 @@ import com.example.notemanagementsystem.Adapter.CategoryAdapter;
 import com.example.notemanagementsystem.Data.NoteManagementDatabase;
 import com.example.notemanagementsystem.Model.Category;
 import com.example.notemanagementsystem.R;
+import com.example.notemanagementsystem.ui.home.HomeViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -35,11 +37,22 @@ public class CategoryFragment extends Fragment {
     private FloatingActionButton btnNewCategory;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        categoryModel =
-                new ViewModelProvider(this).get(CategoryModel.class);
+
         View root = inflater.inflate(R.layout.fragment_category, container, false);
+        categoryAdapter = new CategoryAdapter();
+        rcv_Category = root.findViewById(R.id.rcv_category);
+        rcv_Category.setLayoutManager(new LinearLayoutManager(root.getContext()));
+        categoryModel = new ViewModelProvider(this).get(CategoryModel.class);
+        categoryModel.getListCategory().observe(getActivity(), new Observer<List<Category>>() {
+            @Override
+            public void onChanged(List<Category> categories) {
+                if(categories.size()>0){
+                    categoryAdapter.setData(categories);
+                    rcv_Category.setAdapter(categoryAdapter);
+                }
+            }
+        });
         //init UI
-        rcv_Category = (RecyclerView) root.findViewById(R.id.rcv_category);
         btnNewCategory = (FloatingActionButton) root.findViewById(R.id.btnNewCategory);
         btnNewCategory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,15 +61,6 @@ public class CategoryFragment extends Fragment {
                 add.show(getActivity().getSupportFragmentManager(),"add");
             }
         });
-        //init data in adapter
-        categoryAdapter = new CategoryAdapter();
-        mListCategory = new ArrayList<>();
-        mListCategory = NoteManagementDatabase.getInstance(getActivity()).getCategoryDAO().getListCategory();
-        categoryAdapter.setData(mListCategory);
-
-        rcv_Category.setLayoutManager(new LinearLayoutManager(root.getContext()));
-        rcv_Category.setAdapter(categoryAdapter);
-
         return root;
     }
 
