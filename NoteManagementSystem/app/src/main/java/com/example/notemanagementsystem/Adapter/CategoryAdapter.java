@@ -138,6 +138,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
         void deleteClicked(Category category);
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> parent of 1a228db (category1)
 }
 
 
