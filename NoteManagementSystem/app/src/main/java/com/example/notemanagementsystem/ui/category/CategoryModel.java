@@ -1,6 +1,5 @@
 package com.example.notemanagementsystem.ui.category;
 
-
 import android.app.Application;
 
 import androidx.annotation.NonNull;
