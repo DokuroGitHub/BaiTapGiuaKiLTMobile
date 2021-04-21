@@ -29,4 +29,10 @@ public class CategoryRepository {
             categoryDAO.insert(category);
         });
     }
+
+    public void updateCategory(final Category category) {
+        NoteManagementDatabase.databaseWriteExecutor.execute(() -> {
+            categoryDAO.update(category);
+        });
+    }
 }

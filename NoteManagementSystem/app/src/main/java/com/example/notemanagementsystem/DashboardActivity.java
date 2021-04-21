@@ -62,6 +62,4 @@ public class DashboardActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-
-
 }
