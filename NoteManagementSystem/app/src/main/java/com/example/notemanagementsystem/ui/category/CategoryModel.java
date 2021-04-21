@@ -27,20 +27,10 @@ public class CategoryModel extends AndroidViewModel {
     public void insertCategory(Category category){
         categoryRepository.insertCategory(category);
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-    public void updateCategory(Category category) {
-        categoryRepository.updateCategory(category);
-    }
-=======
     public void updateCategory(Category category){
         categoryRepository.updateCategory(category);
     }
     public void deleteCategory(Category category){
         categoryRepository.deleteCategory(category);
     }
-=======
->>>>>>> parent of 6108fba (category( edit+delete))
-
->>>>>>> Category
 }
