@@ -30,5 +30,11 @@ public class CategoryModel extends AndroidViewModel {
     public void insertCategory(Category category){
         categoryRepository.insertCategory(category);
     }
+    public void updateCategory(Category category){
+        categoryRepository.updateCategory(category);
+    }
+    public void deleteCategory(Category category){
+        categoryRepository.deleteCategory(category);
+    }
 
 }
