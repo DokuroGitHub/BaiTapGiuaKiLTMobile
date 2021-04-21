@@ -30,4 +30,16 @@ public class PriorityRepository {
             priorityDAO.insert(priority);
         });
     }
+
+    public void updatePriority(final Priority priority){
+        NoteManagementDatabase.databaseWriteExecutor.execute(() -> {
+            priorityDAO.update(priority);
+        });
+    }
+
+    public void deletePriority(final Priority priority){
+        NoteManagementDatabase.databaseWriteExecutor.execute(() -> {
+            priorityDAO.delete(priority);
+        });
+    }
 }

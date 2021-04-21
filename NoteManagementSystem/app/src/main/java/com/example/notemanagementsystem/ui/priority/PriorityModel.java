@@ -30,4 +30,12 @@ public class PriorityModel extends AndroidViewModel {
     public void insertPriority(Priority priority){
         priorityRepository.insertPriority(priority);
     }
+
+    public void updatePriority(Priority priority){
+        priorityRepository.updatePriority(priority);
+    }
+
+    public void deletePriority(Priority priority) {
+        priorityRepository.deletePriority(priority);
+    }
 }

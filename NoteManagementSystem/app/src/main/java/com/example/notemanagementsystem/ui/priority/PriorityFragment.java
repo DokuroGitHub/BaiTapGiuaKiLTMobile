@@ -21,7 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class PriorityFragment extends Fragment {
+public class PriorityFragment extends Fragment implements PriorityAdapter.ClickListener {
 
     private PriorityModel priorityModel;
     private RecyclerView rcv_Priority;
@@ -32,7 +32,7 @@ public class PriorityFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_priority, container, false);
-        priorityAdapter = new PriorityAdapter();
+        priorityAdapter = new PriorityAdapter(this);
         rcv_Priority = root.findViewById(R.id.rcv_priority);
         rcv_Priority.setLayoutManager(new LinearLayoutManager(root.getContext()));
         priorityModel = new ViewModelProvider(this).get(PriorityModel.class);
@@ -55,5 +55,15 @@ public class PriorityFragment extends Fragment {
             }
         });
         return root;
+    }
+
+    public void updateClicked(Priority priority) {
+        EditPriority edit = new EditPriority(priority);
+        edit.show(getActivity().getSupportFragmentManager(),"edit");
+    }
+
+    @Override
+    public void deleteClicked(Priority priority) {
+        priorityModel.deletePriority(priority);
     }
 }
