@@ -39,8 +39,8 @@ public class PriorityAdapter extends RecyclerView.Adapter<PriorityAdapter.MyView
         if(priority == null) {
             return;
         }
-        holder.txtPriorityName.setText(priority.getPriorityName());
-        holder.txtCreate_Priority_Date.setText(priority.getCreate_priority_Date().toString());
+        holder.txtPriorityName.setText("Name: "+priority.getPriorityName());
+        holder.txtCreate_Priority_Date.setText("CreateDate: "+priority.getCreate_priority_Date().toString());
 
     }
 
