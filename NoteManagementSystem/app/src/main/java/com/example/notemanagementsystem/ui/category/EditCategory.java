@@ -25,24 +25,30 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class Add_dialog extends AppCompatDialogFragment {
+public class EditCategory extends AppCompatDialogFragment {
     private EditText edt_categoryName;
     private CategoryAdapter categoryAdapter;
     private List<Category> mListCategory;
     private CategoryDAO categoryDAO;
+    private Category category;
     private RecyclerView rcv_Category;
     private CategoryModel categoryModel;
+
+    public EditCategory(Category category) {
+        this.category = category;
+    }
+
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.add_category_dialog,null);
+        View view = inflater.inflate(R.layout.edit_category_dialog,null);
         //init
-        edt_categoryName = view.findViewById(R.id.edt_categoryName);
+        edt_categoryName = view.findViewById(R.id.edt_updateCategoryName);
         rcv_Category = (RecyclerView)view.findViewById(R.id.rcv_category);
-        //add
-        Button btn_addCategory = view.findViewById(R.id.btn_addCategory);
-        btn_addCategory.setOnClickListener(new View.OnClickListener() {
+        //update
+        Button btn_editCategory = view.findViewById(R.id.btn_editCategory);
+        btn_editCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String strCategoryName = edt_categoryName.getText().toString().trim();
@@ -53,13 +59,13 @@ public class Add_dialog extends AppCompatDialogFragment {
                 if(TextUtils.isEmpty(strCategoryName)){
                     return;
                 }
-                //insert
                 categoryDAO = NoteManagementDatabase.getInstance(v.getContext()).getCategoryDAO();
-                Category category = new Category(strCategoryName,strCreateDate);
                 categoryModel = new ViewModelProvider(getActivity()).get(CategoryModel.class);
-                categoryModel.insertCategory(category);
-                Toast.makeText(v.getContext(),"Create category successfully",Toast.LENGTH_SHORT).show();
+                category.setCategoryName(strCategoryName);
+                categoryModel.updateCategory(category);
+                Toast.makeText(v.getContext(),"Update category successfully",Toast.LENGTH_SHORT).show();
                 dismiss();
+
             }
         });
         //close
@@ -73,5 +79,6 @@ public class Add_dialog extends AppCompatDialogFragment {
 
         builder.setView(view);
         return builder.create();
+
     }
 }

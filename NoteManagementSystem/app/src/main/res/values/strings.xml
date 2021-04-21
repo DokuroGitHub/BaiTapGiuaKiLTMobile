@@ -18,5 +18,10 @@
     <string name="menu_account_editProfile">Edit Profile</string>
     <string name="menu_account_changePassword">Change password</string>
 
+    <string-array name="item_recyclerView">
+        <item>Edit</item>
+        <item>Delete</item>
+    </string-array>
+
 
 </resources>

@@ -1,10 +1,12 @@
 package com.example.notemanagementsystem.ui.category;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -28,7 +30,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryFragment extends Fragment {
+public class CategoryFragment extends Fragment implements CategoryAdapter.ClickListener {
 
     private CategoryModel categoryModel;
     private RecyclerView rcv_Category;
@@ -39,7 +41,7 @@ public class CategoryFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_category, container, false);
-        categoryAdapter = new CategoryAdapter();
+        categoryAdapter = new CategoryAdapter(this);
         rcv_Category = root.findViewById(R.id.rcv_category);
         rcv_Category.setLayoutManager(new LinearLayoutManager(root.getContext()));
         categoryModel = new ViewModelProvider(this).get(CategoryModel.class);
@@ -64,4 +66,14 @@ public class CategoryFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void updateClicked(Category category) {
+        EditCategory edit = new EditCategory(category);
+        edit.show(getActivity().getSupportFragmentManager(),"edit");
+    }
+
+    @Override
+    public void deleteClicked(Category category) {
+        categoryModel.deleteCategory(category);
+    }
 }

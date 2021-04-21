@@ -21,12 +21,27 @@ public class CategoryRepository {
         categoryDAO = db.getCategoryDAO();
         mListCategory = categoryDAO.getListCategory();
     }
-    public LiveData<List<Category>> getListCategory(){
+
+    public LiveData<List<Category>> getListCategory() {
         return categoryDAO.getListCategory();
     }
-    public void insertCategory(final Category category){
+
+    public void insertCategory(final Category category) {
         NoteManagementDatabase.databaseWriteExecutor.execute(() -> {
             categoryDAO.insert(category);
         });
     }
+
+    public void updateCategory(final Category category) {
+        NoteManagementDatabase.databaseWriteExecutor.execute(() -> {
+            categoryDAO.update(category);
+        });
+    }
+
+    public void deleteCategory(final Category category) {
+        NoteManagementDatabase.databaseWriteExecutor.execute(() -> {
+            categoryDAO.delete(category);
+        });
+    }
 }
+
