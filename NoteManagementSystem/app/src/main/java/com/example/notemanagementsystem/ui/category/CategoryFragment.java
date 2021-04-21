@@ -1,7 +1,11 @@
 package com.example.notemanagementsystem.ui.category;
 
+<<<<<<< HEAD
 import android.content.Context;
 import android.content.Intent;
+=======
+import android.app.AlertDialog;
+>>>>>>> Category
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -9,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -33,8 +38,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
 public class CategoryFragment extends Fragment {
     private static final int MY_REQUEST_CODE = 10;
+=======
+public class CategoryFragment extends Fragment implements CategoryAdapter.ClickListener {
+
+>>>>>>> Category
     private CategoryModel categoryModel;
     private CategoryDAO categoryDAO;
     private RecyclerView rcv_Category;
@@ -46,7 +56,11 @@ public class CategoryFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_category, container, false);
+<<<<<<< HEAD
         categoryAdapter = new CategoryAdapter(root.getContext());
+=======
+        categoryAdapter = new CategoryAdapter(this);
+>>>>>>> Category
         rcv_Category = root.findViewById(R.id.rcv_category);
         rcv_Category.setLayoutManager(new LinearLayoutManager(root.getContext()));
         categoryModel = new ViewModelProvider(this).get(CategoryModel.class);
@@ -72,6 +86,7 @@ public class CategoryFragment extends Fragment {
     }
 
     @Override
+<<<<<<< HEAD
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId())
         {
@@ -81,5 +96,15 @@ public class CategoryFragment extends Fragment {
                 return false;
         }
         return super.onContextItemSelected(item);
+=======
+    public void updateClicked(Category category) {
+        EditCategory edit = new EditCategory(category);
+        edit.show(getActivity().getSupportFragmentManager(),"edit");
+    }
+
+    @Override
+    public void deleteClicked(Category category) {
+        categoryModel.deleteCategory(category);
+>>>>>>> Category
     }
 }

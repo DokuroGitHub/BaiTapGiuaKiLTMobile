@@ -2,6 +2,7 @@ package com.example.notemanagementsystem.Data;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
@@ -20,9 +21,19 @@ public interface CategoryDAO {
     @Update
     void update(Category category);
 
+<<<<<<< HEAD
     @Query("SELECT * FROM Category")
     LiveData<List<Category>> getListCategory();
 
     @Query("SELECT * FROM category WHERE categoryName = :categoryName and createDate = :createDate")
     User getCategoryName(String categoryName, String createDate);
+=======
+    @Delete
+    void delete(Category category);
+
+    @Query("SELECT * FROM Category")
+    LiveData<List<Category>> getListCategory();
+
+
+>>>>>>> Category
 }
