@@ -41,8 +41,8 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.MyViewHold
         if (status == null){
             return;
         }
-        holder.txtStatusName.setText(status.getStatusName());
-        holder.txtCreateDate.setText(status.getCreateDate());
+        holder.txtStatusName.setText("Name: " + status.getStatusName());
+        holder.txtCreateDate.setText("Created Date: " + status.getCreateDate());
     }
 
     @Override
