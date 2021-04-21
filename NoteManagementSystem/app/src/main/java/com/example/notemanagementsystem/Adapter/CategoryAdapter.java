@@ -22,7 +22,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     //init
     private List<Category> mListCategory;
 
-    private void setData (List<Category> list){
+    public void setData (List<Category> list){
         this.mListCategory = list;
         notifyDataSetChanged();
     }

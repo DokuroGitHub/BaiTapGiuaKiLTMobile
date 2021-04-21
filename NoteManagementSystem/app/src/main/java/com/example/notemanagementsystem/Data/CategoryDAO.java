@@ -1,5 +1,6 @@
 package com.example.notemanagementsystem.Data;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -15,5 +16,5 @@ public interface CategoryDAO {
     void insert(Category category);
 
     @Query("SELECT * FROM Category")
-    List<Category> getListCategory();
+    LiveData<List<Category>> getListCategory();
 }
