@@ -30,6 +30,7 @@ public class CategoryRepository {
         });
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     public void updateCategory(final Category category) {
 =======
@@ -47,4 +48,6 @@ public class CategoryRepository {
         });
     }
 >>>>>>> Category
+=======
+>>>>>>> parent of 6108fba (category( edit+delete))
 }

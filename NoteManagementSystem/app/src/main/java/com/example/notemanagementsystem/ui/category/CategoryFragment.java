@@ -1,11 +1,14 @@
 package com.example.notemanagementsystem.ui.category;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import android.content.Context;
 import android.content.Intent;
 =======
 import android.app.AlertDialog;
 >>>>>>> Category
+=======
+>>>>>>> parent of 6108fba (category( edit+delete))
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -13,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -39,10 +41,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class CategoryFragment extends Fragment {
     private static final int MY_REQUEST_CODE = 10;
 =======
 public class CategoryFragment extends Fragment implements CategoryAdapter.ClickListener {
+=======
+public class CategoryFragment extends Fragment {
+>>>>>>> parent of 6108fba (category( edit+delete))
 
 >>>>>>> Category
     private CategoryModel categoryModel;
@@ -57,10 +63,14 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.ClickL
 
         View root = inflater.inflate(R.layout.fragment_category, container, false);
 <<<<<<< HEAD
+<<<<<<< HEAD
         categoryAdapter = new CategoryAdapter(root.getContext());
 =======
         categoryAdapter = new CategoryAdapter(this);
 >>>>>>> Category
+=======
+        categoryAdapter = new CategoryAdapter();
+>>>>>>> parent of 6108fba (category( edit+delete))
         rcv_Category = root.findViewById(R.id.rcv_category);
         rcv_Category.setLayoutManager(new LinearLayoutManager(root.getContext()));
         categoryModel = new ViewModelProvider(this).get(CategoryModel.class);
@@ -85,6 +95,7 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.ClickL
         return root;
     }
 
+<<<<<<< HEAD
     @Override
 <<<<<<< HEAD
     public boolean onContextItemSelected(@NonNull MenuItem item) {
@@ -107,4 +118,6 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.ClickL
         categoryModel.deleteCategory(category);
 >>>>>>> Category
     }
+=======
+>>>>>>> parent of 6108fba (category( edit+delete))
 }

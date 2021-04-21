@@ -2,10 +2,8 @@ package com.example.notemanagementsystem.Data;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Update;
 
 import com.example.notemanagementsystem.Model.Category;
 import com.example.notemanagementsystem.Model.User;
@@ -18,6 +16,7 @@ public interface CategoryDAO {
     @Insert
     void insert(Category category);
 
+<<<<<<< HEAD
     @Update
     void update(Category category);
 
@@ -36,4 +35,8 @@ public interface CategoryDAO {
 
 
 >>>>>>> Category
+=======
+    @Query("SELECT * FROM Category")
+    LiveData<List<Category>> getListCategory();
+>>>>>>> parent of 6108fba (category( edit+delete))
 }

@@ -1,6 +1,7 @@
 package com.example.notemanagementsystem.Adapter;
 
 import android.content.Context;
+<<<<<<< HEAD
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -11,18 +12,16 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.view.ContextMenu;
+=======
+>>>>>>> parent of 6108fba (category( edit+delete))
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.PrimaryKey;
 
 import com.example.notemanagementsystem.Model.Category;
 import com.example.notemanagementsystem.R;
@@ -38,13 +37,15 @@ import java.util.List;
  */
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
     //init
-    private Context context;
     private List<Category> mListCategory;
+<<<<<<< HEAD
     private ClickListener clickListener;
 
     public CategoryAdapter(ClickListener clickListener) {
         this.clickListener = clickListener;
     }
+=======
+>>>>>>> parent of 6108fba (category( edit+delete))
 
     public void setData(List<Category> list) {
         this.mListCategory = list;
@@ -58,8 +59,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+<<<<<<< HEAD
         context = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_item, parent, false);
+=======
+        View view  = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_item,parent,false);
+>>>>>>> parent of 6108fba (category( edit+delete))
         return new MyViewHolder(view);
     }
 
@@ -69,6 +74,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         if (category == null) {
             return;
         }
+<<<<<<< HEAD
         holder.txtCategoryName.setText("Name: " + category.getCategoryName());
         holder.txtCreateDate.setText("Create date: " + category.getCreateDate().toString());
         holder.txtCategoryName.setText("Name: " + category.getCategoryName());
@@ -103,6 +109,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
             }
         });
         popupMenu.show();
+=======
+        holder.txtCategoryName.setText(category.getCategoryName());
+        holder.txtCreateDate.setText(category.getCreateDate().toString());
+>>>>>>> parent of 6108fba (category( edit+delete))
     }
 
     @Override
@@ -115,9 +125,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         TextView txtCategoryName, txtCreateDate;
+<<<<<<< HEAD
         LinearLayout category_layout;
         LinearLayout category_item;
 
+=======
+>>>>>>> parent of 6108fba (category( edit+delete))
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             txtCategoryName = itemView.findViewById(R.id.txtCategoryName);
@@ -132,6 +145,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         }
 
     }
+<<<<<<< HEAD
 
     public interface ClickListener {
         void updateClicked(Category category);
@@ -142,6 +156,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 =======
 
 >>>>>>> parent of 1a228db (category1)
+=======
+>>>>>>> parent of 6108fba (category( edit+delete))
 }
 
 
