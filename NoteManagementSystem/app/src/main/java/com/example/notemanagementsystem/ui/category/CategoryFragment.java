@@ -41,6 +41,7 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.ClickL
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_category, container, false);
+
         categoryAdapter = new CategoryAdapter(this);
         rcv_Category = root.findViewById(R.id.rcv_category);
         rcv_Category.setLayoutManager(new LinearLayoutManager(root.getContext()));

@@ -22,10 +22,9 @@ public class CategoryRepository {
         mListCategory = categoryDAO.getListCategory();
     }
 
-    public LiveData<List<Category>> getListCategory() {
+    public LiveData<List<Category>> getListCategory(){
         return categoryDAO.getListCategory();
     }
-
     public void insertCategory(final Category category) {
         NoteManagementDatabase.databaseWriteExecutor.execute(() -> {
             categoryDAO.insert(category);
@@ -44,4 +43,3 @@ public class CategoryRepository {
         });
     }
 }
-

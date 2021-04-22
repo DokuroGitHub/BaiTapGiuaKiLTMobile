@@ -1,18 +1,41 @@
 package com.example.notemanagementsystem.ui.status;
 
+
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+import com.example.notemanagementsystem.Model.Status;
+import com.example.notemanagementsystem.Repository.StatusRepository;
 
-public class StatusViewModel extends ViewModel {
-    private MutableLiveData<String> mText;
 
-    public StatusViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is status fragment");
+import java.util.List;
+
+public class StatusViewModel extends AndroidViewModel {
+    private static StatusRepository statusRepository;
+    LiveData<List<Status>> mListStatus;
+
+    public StatusViewModel(@NonNull Application application){
+        super(application);
+        statusRepository = new StatusRepository(application);
+        mListStatus = statusRepository.getListStatus();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<List<Status>> getListStatus(){
+        return statusRepository.getListStatus();
     }
+
+    public void insertStatus(Status status){
+        statusRepository.insertStatus(status);
+    }
+
+    public static void updateStatus(Status status){
+        statusRepository.updateStatus(status);
+    }
+
+    public void deleteStatus(Status status){
+        statusRepository.deleteStatus(status);
+    }
+
 }

@@ -1,7 +1,6 @@
 package com.example.notemanagementsystem.Adapter;
 
 import android.content.Context;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,9 +11,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.PrimaryKey;
 
-import com.example.notemanagementsystem.Model.Category;
+import com.example.notemanagementsystem.Model.Status;
 import com.example.notemanagementsystem.R;
 
 import java.util.List;
@@ -23,19 +21,20 @@ import java.util.List;
  * This class used to create RecyclerView.Adapter
  * Adapter is a place to progress data and assign data for RecyclerView
  */
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder>  {
+public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.MyViewHolder>  {
     //init
     private Context context;
-    private List<Category> mListCategory;
+    private List<Status> mListStatus;
     private ClickListener clickListener;
 
 
-    public CategoryAdapter(ClickListener clickListener){
+    public StatusAdapter(ClickListener clickListener){
         this.clickListener = clickListener;
     }
 
-    public void setData (List<Category> list){
-        this.mListCategory = list;
+
+    public void setData (List<Status> list){
+        this.mListStatus = list;
         notifyDataSetChanged();
     }
 
@@ -43,22 +42,22 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
-        View view  = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_item,parent,false);
+        View view  = LayoutInflater.from(parent.getContext()).inflate(R.layout.status_item,parent,false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Category category = mListCategory.get(position);
-        if (category == null){
+        Status status = mListStatus.get(position);
+        if (status == null){
             return;
         }
-        holder.txtCategoryName.setText("Name: " + category.getCategoryName());
-        holder.txtCreateDate.setText("Create date: "+category.getCreateDate().toString());
-        holder.category_item.setOnLongClickListener(new View.OnLongClickListener() {
+        holder.txtStatusName.setText("Name: " + status.getStatusName());
+        holder.txtCreateDate.setText("Create date: "+status.getCreateDate().toString());
+        holder.status_item.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                showPopup(v,category);
+                showPopup(v,status);
                 return false;
             }
         });
@@ -66,7 +65,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     }
 
 
-    public void showPopup(View view, Category category){
+    public void showPopup(View view, Status status){
         PopupMenu popupMenu = new PopupMenu(context,view);
         popupMenu.inflate(R.menu.menu);
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -75,10 +74,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
                 int id = item.getItemId();
                 switch (id){
                     case R.id.menu_edit:
-                        clickListener.updateClicked(category);
+                        clickListener.updateClicked(status);
                         break;
                     case R.id.menu_delete:
-                        clickListener.deleteClicked(category);
+                        clickListener.deleteClicked(status);
                         break;
                 }
                 return false;
@@ -89,26 +88,25 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
     @Override
     public int getItemCount() {
-        if(mListCategory != null)
-            return mListCategory.size();
+        if(mListStatus != null)
+            return mListStatus.size();
         return 0;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView txtCategoryName, txtCreateDate;
-        LinearLayout category_item;
+        TextView txtStatusName, txtCreateDate;
+        LinearLayout status_item;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtCategoryName = itemView.findViewById(R.id.txtCategoryName);
+            txtStatusName = itemView.findViewById(R.id.txtStatusName);
             txtCreateDate = itemView.findViewById(R.id.txtCreateDate);
-            category_item =itemView.findViewById(R.id.category_item);
+            status_item =itemView.findViewById(R.id.status_item);
         }
     }
 
     public interface ClickListener{
-        void updateClicked(Category category);
-        void deleteClicked(Category category);
+        void updateClicked(Status status);
+        void deleteClicked(Status status);
     }
-
+//
 }
-
