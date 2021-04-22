@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_nav_home_to_nav_changePassword"
             app:destination="@id/nav_changePassword" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_editprofile"
+            app:destination="@id/nav_editProfile" />
     </fragment>
     <fragment
         android:id="@+id/nav_changePassword"
@@ -44,4 +47,13 @@
         android:name="com.example.notemanagementsystem.ui.priority.PriorityFragment"
         android:label="Priority Form"
         tools:layout="@layout/fragment_priority" />
+    <fragment
+        android:id="@+id/nav_editProfile"
+        android:name="com.example.notemanagementsystem.ui.editProfile.EditProfileFragment"
+        android:label="fragment_editprofile"
+        tools:layout="@layout/fragment_editprofile" >
+        <action
+            android:id="@+id/action_nav_editprofile_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 </navigation>

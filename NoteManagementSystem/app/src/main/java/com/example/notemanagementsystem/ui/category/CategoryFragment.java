@@ -72,6 +72,7 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.ClickL
         edit.show(getActivity().getSupportFragmentManager(),"edit");
     }
 
+    @NonNull
     @Override
     public void deleteClicked(Category category) {
         categoryModel.deleteCategory(category);
