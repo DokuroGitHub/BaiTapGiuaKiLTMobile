@@ -20,29 +20,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.notemanagementsystem.Adapter.CategoryAdapter;
 import com.example.notemanagementsystem.Adapter.StatusAdapter;
-import com.example.notemanagementsystem.Data.NoteManagementDatabase;
-import com.example.notemanagementsystem.Model.Category;
 import com.example.notemanagementsystem.Model.Status;
 import com.example.notemanagementsystem.R;
-import com.example.notemanagementsystem.ui.category.CategoryModel;
-import com.example.notemanagementsystem.ui.home.HomeViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class StatusFragment extends Fragment {
+public class StatusFragment extends Fragment implements StatusAdapter.ClickListener{
 
     private StatusViewModel statusModel;
     private RecyclerView rcv_Status;
     private StatusAdapter statusAdapter;
-    private List<Category> mListStatus;
+    private List<Status> mListStatus;
     private FloatingActionButton btnNewStatus;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_status, container, false);
-        statusAdapter = new StatusAdapter();
+        statusAdapter = new StatusAdapter(this);
         rcv_Status = root.findViewById(R.id.rcv_status);
         rcv_Status.setLayoutManager(new LinearLayoutManager(root.getContext()));
         statusModel = new ViewModelProvider(this).get(StatusViewModel.class);
@@ -67,4 +62,14 @@ public class StatusFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void updateClicked(Status status) {
+        EditStatus edit = new EditStatus(status);
+        edit.show(getActivity().getSupportFragmentManager(),"edit");
+    }
+
+    @Override
+    public void deleteClicked(Status status) {
+        statusModel.deleteStatus(status);
+    }
 }

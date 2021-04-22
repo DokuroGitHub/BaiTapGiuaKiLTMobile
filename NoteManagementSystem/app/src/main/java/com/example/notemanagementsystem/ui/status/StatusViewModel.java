@@ -13,7 +13,7 @@ import com.example.notemanagementsystem.Repository.StatusRepository;
 import java.util.List;
 
 public class StatusViewModel extends AndroidViewModel {
-    private StatusRepository statusRepository;
+    private static StatusRepository statusRepository;
     LiveData<List<Status>> mListStatus;
 
     public StatusViewModel(@NonNull Application application){
@@ -28,6 +28,14 @@ public class StatusViewModel extends AndroidViewModel {
 
     public void insertStatus(Status status){
         statusRepository.insertStatus(status);
+    }
+
+    public static void updateStatus(Status status){
+        statusRepository.updateStatus(status);
+    }
+
+    public void deleteStatus(Status status){
+        statusRepository.deleteStatus(status);
     }
 
 }

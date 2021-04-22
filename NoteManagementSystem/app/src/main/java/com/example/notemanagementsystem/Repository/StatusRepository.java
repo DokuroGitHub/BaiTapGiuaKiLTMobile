@@ -23,9 +23,22 @@ public class StatusRepository {
     public LiveData<List<Status>> getListStatus(){
         return statusDAO.getListStatus();
     }
+
     public void insertStatus(final Status status){
         NoteManagementDatabase.databaseWriteExecutor.execute(() -> {
             statusDAO.insert(status);
+        });
+    }
+
+    public void updateStatus(final Status status) {
+        NoteManagementDatabase.databaseWriteExecutor.execute(() -> {
+            statusDAO.update(status);
+        });
+    }
+
+    public void deleteStatus(final Status status) {
+        NoteManagementDatabase.databaseWriteExecutor.execute(() -> {
+            statusDAO.delete(status);
         });
     }
 }
