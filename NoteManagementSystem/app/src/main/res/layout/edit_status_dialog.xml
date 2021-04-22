@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txt_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Category Form"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_margin="10dp"/>
+    <EditText
+        android:id="@+id/edt_updateStatusName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_status"/>
+    <Button
+        android:id="@+id/btn_editStatus"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#d6d7d6"
+        android:text="Edit"
+        android:textColor="@color/black"
+        android:layout_below="@+id/edt_updateStatusName"/>
+    <Button
+        android:id="@+id/btn_closeStatus"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#d6d7d6"
+        android:text="Close"
+        android:textColor="@color/black"
+        android:layout_below="@+id/edt_updateStatusName"/>
+
+</RelativeLayout>

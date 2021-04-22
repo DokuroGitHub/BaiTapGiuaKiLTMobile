@@ -21,29 +21,35 @@ import com.example.notemanagementsystem.Data.StatusDAO;
 import com.example.notemanagementsystem.Model.Status;
 import com.example.notemanagementsystem.R;
 
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class Add_dialog extends AppCompatDialogFragment {
+public class EditStatus extends AppCompatDialogFragment {
     private EditText edt_statusName;
     private StatusAdapter statusAdapter;
     private List<Status> mListStatus;
     private StatusDAO statusDAO;
+    private Status status;
     private RecyclerView rcv_Status;
     private StatusViewModel statusModel;
+
+    public EditStatus(Status status) {
+        this.status = status;
+    }
+
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.add_status_dialog,null);
+        View view = inflater.inflate(R.layout.edit_status_dialog,null);
         //init
-        edt_statusName = view.findViewById(R.id.edt_statusName);
+        edt_statusName = view.findViewById(R.id.edt_updateStatusName);
         rcv_Status = (RecyclerView)view.findViewById(R.id.rcv_status);
-
-        //add
-        Button btn_addStatus = view.findViewById(R.id.btn_addStatus);
-        btn_addStatus.setOnClickListener(new View.OnClickListener() {
+        //update
+        Button btn_editStatus = view.findViewById(R.id.btn_editStatus);
+        btn_editStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String strStatusName = edt_statusName.getText().toString().trim();
@@ -54,15 +60,12 @@ public class Add_dialog extends AppCompatDialogFragment {
                 if(TextUtils.isEmpty(strStatusName)){
                     return;
                 }
-
-                //insert
                 statusDAO = NoteManagementDatabase.getInstance(v.getContext()).getStatusDAO();
-                Status status = new Status(strStatusName,strCreateDate);
                 statusModel = new ViewModelProvider(getActivity()).get(StatusViewModel.class);
-                statusModel.insertStatus(status);
-                Toast.makeText(v.getContext(),"Create status successfully",Toast.LENGTH_SHORT).show();
+                status.setStatusName(strStatusName);
+                StatusViewModel.updateStatus(status);
+                Toast.makeText(v.getContext(),"Update status successfully",Toast.LENGTH_SHORT).show();
                 dismiss();
-
             }
         });
 

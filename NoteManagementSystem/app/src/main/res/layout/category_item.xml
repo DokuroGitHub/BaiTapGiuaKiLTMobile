@@ -4,8 +4,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:id="@+id/category_item">
-
-
     <TextView
         android:id="@+id/txtCategoryName"
         android:layout_width="match_parent"
