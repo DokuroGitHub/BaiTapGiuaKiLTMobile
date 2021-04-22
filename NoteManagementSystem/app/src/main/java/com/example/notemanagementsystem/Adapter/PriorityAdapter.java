@@ -39,6 +39,7 @@ public class PriorityAdapter extends RecyclerView.Adapter<PriorityAdapter.MyView
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        context = parent.getContext();
         View view  = LayoutInflater.from(parent.getContext()).inflate(R.layout.priority_item,parent,false);
         return new MyViewHolder(view);
     }
