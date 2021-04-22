@@ -109,5 +109,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         void updateClicked(Category category);
         void deleteClicked(Category category);
     }
-//
+
 }
+

@@ -28,3 +28,4 @@ public interface CategoryDAO {
     LiveData<List<Category>> getListCategory();
 
 }
+
