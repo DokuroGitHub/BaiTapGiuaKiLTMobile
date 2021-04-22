@@ -18,6 +18,7 @@ public class SignUpActivity extends AppCompatActivity {
     private Button btnSignIn,btnSignUp;
     private UserDAO userDAO;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

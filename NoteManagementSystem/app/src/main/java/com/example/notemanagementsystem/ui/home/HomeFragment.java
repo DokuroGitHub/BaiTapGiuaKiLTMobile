@@ -1,6 +1,7 @@
 package com.example.notemanagementsystem.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,9 +33,6 @@ public class HomeFragment extends Fragment {
                 textView.setText(s);
             }
         });
-
-
-
-        return root;
+     return root;
     }
 }

@@ -50,6 +50,7 @@ public class PriorityAdapter extends RecyclerView.Adapter<PriorityAdapter.MyView
             return mListPriority.size();
         return 0;
     }
+    
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView txtPriorityName, txtCreate_Priority_Date;

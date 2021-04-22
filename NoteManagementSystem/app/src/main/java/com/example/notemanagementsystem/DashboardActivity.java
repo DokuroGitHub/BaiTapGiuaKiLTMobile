@@ -7,11 +7,15 @@ import android.view.Menu;
 import android.widget.TextView;
 
 import com.example.notemanagementsystem.Model.User;
+import com.example.notemanagementsystem.ui.account.ChangePasswordFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.core.view.GravityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -36,7 +40,7 @@ public class DashboardActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_category, R.id.nav_priority, R.id.nav_status, R.id.nav_note)
+                R.id.nav_home, R.id.nav_category, R.id.nav_priority, R.id.nav_status, R.id.nav_note, R.id.nav_changePassword)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -48,11 +52,29 @@ public class DashboardActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.dashboard, menu);
-        user = (User)getIntent().getSerializableExtra("User");
+        user = (User)getIntent().getSerializableExtra("UserRepository");
         txtUser = (TextView)findViewById(R.id.txtUser);
         if (user != null)
             txtUser.setText(user.getEmail());
+        //send data to fragment
+        FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putString("email",user.getEmail());
+        ChangePasswordFragment fragment = new ChangePasswordFragment();
+        fragment.setArguments(bundle);
         return true;
+    }
+
+    public Bundle getMyData() {
+        user = (User)getIntent().getSerializableExtra("UserRepository");
+        txtUser = (TextView)findViewById(R.id.txtUser);
+        if (user != null)
+            txtUser.setText(user.getEmail());
+        //send data to fragment
+        FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
+        Bundle hm = new Bundle();
+        hm.putString("val1",user.getEmail());
+        return hm;
     }
 
     @Override

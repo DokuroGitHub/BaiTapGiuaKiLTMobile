@@ -65,7 +65,6 @@ public class EditCategory extends AppCompatDialogFragment {
                 categoryModel.updateCategory(category);
                 Toast.makeText(v.getContext(),"Update category successfully",Toast.LENGTH_SHORT).show();
                 dismiss();
-
             }
         });
         //close

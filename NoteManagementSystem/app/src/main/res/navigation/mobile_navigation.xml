@@ -9,7 +9,20 @@
         android:id="@+id/nav_home"
         android:name="com.example.notemanagementsystem.ui.home.HomeFragment"
         android:label="Dashboard Form"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_changePassword"
+            app:destination="@id/nav_changePassword" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_changePassword"
+        android:name="com.example.notemanagementsystem.ui.account.ChangePasswordFragment"
+        android:label="@string/menu_account_changePassword"
+        tools:layout="@layout/fragment_change_password" >
+        <action
+            android:id="@+id/action_nav_changePassword_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
     <fragment
         android:id="@+id/nav_note"
         android:name="com.example.notemanagementsystem.ui.note.NoteFragment"

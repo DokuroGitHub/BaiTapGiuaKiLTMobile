@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 User user = userDAO.getUser(email,password);
                 if(user!= null){
                     Intent intent = new Intent(v.getContext(),DashboardActivity.class);
-                    intent.putExtra("User",user);
+                    intent.putExtra("UserRepository",user);
                     startActivity(intent);
                     finish();
                 }else {
