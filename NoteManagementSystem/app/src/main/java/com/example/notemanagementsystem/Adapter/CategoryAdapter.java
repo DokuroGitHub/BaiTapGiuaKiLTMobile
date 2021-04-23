@@ -62,9 +62,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
                 return false;
             }
         });
-
     }
-
 
     public void showPopup(View view, Category category){
         PopupMenu popupMenu = new PopupMenu(context,view);
