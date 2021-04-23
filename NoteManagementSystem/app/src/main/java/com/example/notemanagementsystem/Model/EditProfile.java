@@ -1,6 +1,7 @@
 package com.example.notemanagementsystem.Model;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -11,9 +12,11 @@ public class EditProfile implements Serializable {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     private int id;
-
+    @Nullable
     private String firstName;
+    @Nullable
     private String lastName;
+
     private String email;
 
     public EditProfile (String firstName, String lastName, String email){
@@ -31,6 +34,7 @@ public class EditProfile implements Serializable {
         this.id = id;
     }
 
+    @Nullable
     public String getFirstName() {
         return firstName;
     }
@@ -39,6 +43,7 @@ public class EditProfile implements Serializable {
         this.firstName = firstName;
     }
 
+    @Nullable
     public String getLastName() {
         return lastName;
     }

@@ -21,8 +21,9 @@ import androidx.appcompat.widget.Toolbar;
 
 public class DashboardActivity extends AppCompatActivity {
     private User user;
-    private TextView txtUser;
-    private EditProfile profile;
+    //private TextView txtUser;
+    private TextView txtUser, txtfname, txtnname;
+    //private EditProfile profile;
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
@@ -50,6 +51,8 @@ public class DashboardActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.dashboard, menu);
         user = (User)getIntent().getSerializableExtra("UserRepository");
         txtUser = (TextView)findViewById(R.id.txtUser);
+
+
         if (user != null)
             txtUser.setText(user.getEmail());
         //send data to fragment
@@ -60,6 +63,11 @@ public class DashboardActivity extends AppCompatActivity {
         bundle.putString("email",user.getEmail());
         ChangePasswordFragment fragment = new ChangePasswordFragment();
         fragment.setArguments(bundle);
+
+        Bundle bundle2 = new Bundle();
+        bundle2.putString("email",user.getEmail());
+        EditProfileFragment fragment1 = new EditProfileFragment();
+        fragment1.setArguments(bundle2);
         return true;
     }
 

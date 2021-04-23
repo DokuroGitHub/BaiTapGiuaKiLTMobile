@@ -52,7 +52,7 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(SignUpActivity.this,"Please enter all the fields",Toast.LENGTH_SHORT).show();
                 else {
                     if(password.equals(rePassword)){
-                        User user = new User(email,password);
+                        User user = new User(email,password,"", "");
                         userDAO.insert(user);
                         Toast.makeText(SignUpActivity.this,"Create account successfully",Toast.LENGTH_SHORT).show();
                     } else {

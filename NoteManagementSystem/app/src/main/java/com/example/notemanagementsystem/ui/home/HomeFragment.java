@@ -48,15 +48,15 @@ public class HomeFragment extends Fragment {
     }
 
     public void setupPieChart(String [] status,int[] percent) {
-        Pie pie = AnyChart.pie();
-        List<DataEntry> dataEntries = new ArrayList<>();
-
-        for(int i = 0; i<status.length;i++){
-            dataEntries.add(new ValueDataEntry(status[i],percent[i]));
-        }
-
-        pie.data(dataEntries);
-        anyChartView.setChart(pie);
+//        Pie pie = AnyChart.pie();
+//        List<DataEntry> dataEntries = new ArrayList<>();
+//
+//        for(int i = 0; i<status.length;i++){
+//            dataEntries.add(new ValueDataEntry(status[i],percent[i]));
+//        }
+//
+//        pie.data(dataEntries);
+//        anyChartView.setChart(pie);
 
     }
 
