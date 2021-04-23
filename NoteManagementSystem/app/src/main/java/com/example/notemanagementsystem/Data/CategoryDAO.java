@@ -5,9 +5,11 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.example.notemanagementsystem.Model.Category;
+import com.example.notemanagementsystem.Model.NoteAndMenu;
 import com.example.notemanagementsystem.Model.User;
 
 
@@ -26,5 +28,8 @@ public interface CategoryDAO {
 
     @Query("SELECT * FROM Category")
     LiveData<List<Category>> getListCategory();
+
+    @Query("SELECT * FROM Category")
+    List<Category> getListCategories();
 
 }

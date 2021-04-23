@@ -25,7 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class Add_dialog extends AppCompatDialogFragment {
+public class Add_dialog_category extends AppCompatDialogFragment {
     private EditText edt_categoryName;
     private CategoryAdapter categoryAdapter;
     private List<Category> mListCategory;

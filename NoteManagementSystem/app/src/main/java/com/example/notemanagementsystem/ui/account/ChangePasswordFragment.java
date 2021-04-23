@@ -1,6 +1,5 @@
 package com.example.notemanagementsystem.ui.account;
 
-import android.accounts.Account;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +18,6 @@ import com.example.notemanagementsystem.Data.NoteManagementDatabase;
 import com.example.notemanagementsystem.Data.UserDAO;
 import com.example.notemanagementsystem.Model.User;
 import com.example.notemanagementsystem.R;
-import com.example.notemanagementsystem.ui.category.CategoryModel;
-
-import java.security.PublicKey;
 
 public class ChangePasswordFragment extends Fragment {
     private Button btnHome,btnChangePassword;

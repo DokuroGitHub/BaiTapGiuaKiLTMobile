@@ -25,6 +25,10 @@ public class PriorityRepository {
         return priorityDAO.getListPriority();
     }
 
+    public List<Priority> getListPriorityDF() {
+        return priorityDAO.getListPriorityDF();
+    }
+
     public void insertPriority(final Priority priority){
         NoteManagementDatabase.databaseWriteExecutor.execute(() -> {
             priorityDAO.insert(priority);

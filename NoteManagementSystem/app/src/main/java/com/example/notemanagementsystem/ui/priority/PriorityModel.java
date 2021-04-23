@@ -27,6 +27,10 @@ public class PriorityModel extends AndroidViewModel {
         return priorityRepository.getListPriority();
     }
 
+    public List<Priority> getListPriorityDF() {
+        return priorityRepository.getListPriorityDF();
+    }
+
     public void insertPriority(Priority priority){
         priorityRepository.insertPriority(priority);
     }

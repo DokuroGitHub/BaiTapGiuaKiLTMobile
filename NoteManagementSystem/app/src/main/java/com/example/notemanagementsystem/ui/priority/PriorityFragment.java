@@ -4,10 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -30,7 +28,6 @@ public class PriorityFragment extends Fragment implements PriorityAdapter.ClickL
     private FloatingActionButton btnNewPriority;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
         View root = inflater.inflate(R.layout.fragment_priority, container, false);
         priorityAdapter = new PriorityAdapter(this);
         rcv_Priority = root.findViewById(R.id.rcv_priority);
@@ -50,7 +47,7 @@ public class PriorityFragment extends Fragment implements PriorityAdapter.ClickL
         btnNewPriority.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                com.example.notemanagementsystem.ui.priority.Add_dialog add = new Add_dialog();
+                Add_dialog_priority add = new Add_dialog_priority();
                 add.show(getActivity().getSupportFragmentManager(),"add");
             }
         });

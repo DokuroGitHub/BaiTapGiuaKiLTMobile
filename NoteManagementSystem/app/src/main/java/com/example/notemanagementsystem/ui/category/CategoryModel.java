@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 import com.example.notemanagementsystem.Model.Category;
+import com.example.notemanagementsystem.Model.NoteAndMenu;
 import com.example.notemanagementsystem.Repository.CategoryRepository;
 
 import java.util.List;
@@ -24,6 +25,10 @@ public class CategoryModel extends AndroidViewModel {
 
     public LiveData<List<Category>> getListCategory(){
         return categoryRepository.getListCategory();
+    }
+
+    public List<Category> getListCategories(){
+        return categoryRepository.getListCategories();
     }
     public void insertCategory(Category category){
         categoryRepository.insertCategory(category);

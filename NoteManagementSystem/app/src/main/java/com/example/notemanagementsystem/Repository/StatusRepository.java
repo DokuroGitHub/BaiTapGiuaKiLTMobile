@@ -41,4 +41,8 @@ public class StatusRepository {
             statusDAO.delete(status);
         });
     }
+
+    public List<Status> getListStatusDF() {
+        return statusDAO.getListStatusDF();
+    }
 }

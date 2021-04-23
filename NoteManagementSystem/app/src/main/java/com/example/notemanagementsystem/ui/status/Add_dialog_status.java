@@ -25,7 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class Add_dialog extends AppCompatDialogFragment {
+public class Add_dialog_status extends AppCompatDialogFragment {
     private EditText edt_statusName;
     private StatusAdapter statusAdapter;
     private List<Status> mListStatus;

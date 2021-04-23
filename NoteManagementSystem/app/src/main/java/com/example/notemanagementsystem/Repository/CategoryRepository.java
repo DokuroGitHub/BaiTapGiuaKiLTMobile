@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import com.example.notemanagementsystem.Data.CategoryDAO;
 import com.example.notemanagementsystem.Data.NoteManagementDatabase;
 import com.example.notemanagementsystem.Model.Category;
+import com.example.notemanagementsystem.Model.NoteAndMenu;
 
 import java.util.List;
 
@@ -25,6 +26,8 @@ public class CategoryRepository {
     public LiveData<List<Category>> getListCategory(){
         return categoryDAO.getListCategory();
     }
+
+    public List<Category> getListCategories(){return categoryDAO.getListCategories();}
     public void insertCategory(final Category category) {
         NoteManagementDatabase.databaseWriteExecutor.execute(() -> {
             categoryDAO.insert(category);

@@ -6,6 +6,8 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+
+import com.example.notemanagementsystem.Model.Category;
 import com.example.notemanagementsystem.Model.Status;
 import com.example.notemanagementsystem.Repository.StatusRepository;
 
@@ -24,6 +26,10 @@ public class StatusViewModel extends AndroidViewModel {
 
     public LiveData<List<Status>> getListStatus(){
         return statusRepository.getListStatus();
+    }
+
+    public List<Status> getListStatusDF(){
+        return statusRepository.getListStatusDF();
     }
 
     public void insertStatus(Status status){

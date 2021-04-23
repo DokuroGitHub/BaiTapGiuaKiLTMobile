@@ -42,4 +42,9 @@ public class Priority implements Serializable {
     public void setCreate_priority_Date(String create_priority_Date) {
         this.create_priority_Date = create_priority_Date;
     }
+
+    @Override
+    public String toString() {
+        return priorityName ;
+    }
 }

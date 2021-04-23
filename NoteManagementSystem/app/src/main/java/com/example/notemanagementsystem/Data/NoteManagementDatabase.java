@@ -8,6 +8,7 @@ import androidx.room.TypeConverters;
 
 import com.example.notemanagementsystem.Model.Category;
 import com.example.notemanagementsystem.Model.EditProfile;
+import com.example.notemanagementsystem.Model.Note;
 import com.example.notemanagementsystem.Model.Priority;
 import com.example.notemanagementsystem.Model.Status;
 import com.example.notemanagementsystem.Model.User;
@@ -15,7 +16,7 @@ import com.example.notemanagementsystem.Model.User;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@androidx.room.Database(entities = {User.class, Category.class, Priority.class, Status.class, EditProfile.class}, version = 1, exportSchema = false)
+@androidx.room.Database(entities = {User.class, Category.class, Priority.class, Status.class, EditProfile.class, Note.class}, version = 1, exportSchema = false)
 
 public abstract class NoteManagementDatabase extends RoomDatabase {
     public static final String DATABASE_NAME = "NoteManagement.db";
@@ -24,6 +25,7 @@ public abstract class NoteManagementDatabase extends RoomDatabase {
     public abstract PriorityDAO getPriorityDAO();
     public abstract EditProfileDAO getProfileDAO();
     public abstract StatusDAO getStatusDAO();
+    public abstract NoteDAO getNoteDAO();
     private static NoteManagementDatabase instance;
     private static final int NUMBER_OF_THREADS = 4;
     public static final ExecutorService databaseWriteExecutor =

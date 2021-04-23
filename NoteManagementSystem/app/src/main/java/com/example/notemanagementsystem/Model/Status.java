@@ -46,5 +46,10 @@ public class Status implements Serializable {
     public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
+
+    @Override
+    public String toString() {
+        return  statusName ;
+    }
 }
 
