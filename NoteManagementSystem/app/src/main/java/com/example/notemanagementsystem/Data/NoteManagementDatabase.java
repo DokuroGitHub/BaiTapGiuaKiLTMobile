@@ -15,7 +15,7 @@ import com.example.notemanagementsystem.Model.User;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@androidx.room.Database(entities = {User.class, Category.class, Priority.class, Status.class, , EditProfile.class}, version = 1, exportSchema = false)
+@androidx.room.Database(entities = {User.class, Category.class, Priority.class, Status.class, EditProfile.class}, version = 1, exportSchema = false)
 
 public abstract class NoteManagementDatabase extends RoomDatabase {
     public static final String DATABASE_NAME = "NoteManagement.db";
