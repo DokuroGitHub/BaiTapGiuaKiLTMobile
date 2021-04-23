@@ -25,19 +25,18 @@ public class NoteViewModel extends AndroidViewModel {
         super(application);
         noteRepository = new NoteRepository(application);
         mListNote = noteRepository.getListNote();
-        mListNoteAndMenu = noteRepository.getListNoteName();
     }
 
     public LiveData<List<Note>> getListNote(){
         return noteRepository.getListNote();
     }
 
-    public LiveData<List<NoteAndMenu>> getListNoteName(){
-        return noteRepository.getListNoteName();
-    }
-
     public void insertNote (Note note){
         noteRepository.insertNote(note);
+    }
+
+    public void updateNote (Note note){
+        noteRepository.updateNote(note);
     }
 
 }

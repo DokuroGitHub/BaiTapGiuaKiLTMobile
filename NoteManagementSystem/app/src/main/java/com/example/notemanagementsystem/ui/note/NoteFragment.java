@@ -20,6 +20,7 @@ import com.example.notemanagementsystem.Model.Note;
 import com.example.notemanagementsystem.Model.NoteAndMenu;
 import com.example.notemanagementsystem.R;
 import com.example.notemanagementsystem.ui.category.CategoryModel;
+import com.example.notemanagementsystem.ui.category.EditCategory;
 import com.example.notemanagementsystem.ui.status.Add_dialog_status;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -41,9 +42,9 @@ public class NoteFragment extends Fragment implements NoteAdapter.ClickListener{
         rcv_note = root.findViewById(R.id.rcv_note);
         rcv_note.setLayoutManager(new LinearLayoutManager(root.getContext()));
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
-        noteViewModel.getListNoteName().observe(getActivity(), new Observer<List<NoteAndMenu>>() {
+        noteViewModel.getListNote().observe(getActivity(), new Observer<List<Note>>() {
             @Override
-            public void onChanged(List<NoteAndMenu> notes) {
+            public void onChanged(List<Note> notes) {
                 if(notes.size()>0){
                     noteAdapter.setData(notes);
                     rcv_note.setAdapter(noteAdapter);
@@ -65,6 +66,7 @@ public class NoteFragment extends Fragment implements NoteAdapter.ClickListener{
 
     @Override
     public void ClickedItem(Note note) {
-
+        EditNote edit = new EditNote(note);
+        edit.show(getActivity().getSupportFragmentManager(),"edit");
     }
 }

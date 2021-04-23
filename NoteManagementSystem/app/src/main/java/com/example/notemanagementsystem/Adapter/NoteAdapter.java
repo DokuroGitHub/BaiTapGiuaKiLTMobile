@@ -19,7 +19,6 @@ import java.util.List;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> {
     private Context context;
-    private List<NoteAndMenu> mListNote;
     private List<Note> mListNoteItem;
     private ClickListener clickListener;
 
@@ -27,8 +26,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
         this.clickListener = clickListener;
     }
 
-    public void setData (List<NoteAndMenu> list){
-        this.mListNote = list;
+    public void setData (List<Note> list){
+        this.mListNoteItem = list;
         notifyDataSetChanged();
     }
     @NonNull
@@ -41,8 +40,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        NoteAndMenu note = mListNote.get(position);
-        Note noteItem = mListNoteItem.get(position);
+        Note note = mListNoteItem.get(position);
         if (note == null){
             return;
         }
@@ -55,7 +53,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
         holder.item.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                clickListener.ClickedItem(noteItem);
+                clickListener.ClickedItem(note);
                 return false;
             }
         });
@@ -63,10 +61,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
 
     @Override
     public int getItemCount() {
-        if(mListNote != null)
-            return mListNote.size();
         if(mListNoteItem != null)
-            return mListNote.size();
+            return mListNoteItem.size();
         return 0;
     }
 

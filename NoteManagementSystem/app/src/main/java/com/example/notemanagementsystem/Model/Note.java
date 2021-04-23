@@ -12,14 +12,27 @@ public class Note implements Serializable {
     @NonNull
     private int id;
     private String noteName;
+    private String categoryName;
+    private String priorityName;
+    private String statusName;
+    private String plantDate;
+    private String currentDate;
 
-    public Note(String noteName, int categoryID, int priorityID, int statusID, String plantDate, String currentDate) {
+    public Note(String noteName, String categoryName, String priorityName, String statusName, String plantDate, String currentDate) {
         this.noteName = noteName;
-        this.categoryID = categoryID;
-        this.priorityID = priorityID;
-        this.statusID = statusID;
+        this.categoryName = categoryName;
+        this.priorityName = priorityName;
+        this.statusName = statusName;
         this.plantDate = plantDate;
         this.currentDate = currentDate;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNoteName() {
@@ -30,42 +43,28 @@ public class Note implements Serializable {
         this.noteName = noteName;
     }
 
-    private int categoryID;
-    private int priorityID;
-    private int statusID;
-    private String plantDate;
-    private String currentDate;
-
-    public int getId() {
-        return id;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public int getCategoryID() {
-        return categoryID;
+    public String getPriorityName() {
+        return priorityName;
     }
 
-    public void setCategoryID(int categoryID) {
-        this.categoryID = categoryID;
+    public void setPriorityName(String priorityName) {
+        this.priorityName = priorityName;
     }
 
-    public int getPriorityID() {
-        return priorityID;
+    public String getStatusName() {
+        return statusName;
     }
 
-    public void setPriorityID(int priorityID) {
-        this.priorityID = priorityID;
-    }
-
-    public int getStatusID() {
-        return statusID;
-    }
-
-    public void setStatusID(int statusID) {
-        this.statusID = statusID;
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
     }
 
     public String getPlantDate() {

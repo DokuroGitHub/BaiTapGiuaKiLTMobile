@@ -42,6 +42,7 @@ import java.util.List;
 
 public class EditNote extends AppCompatDialogFragment  {
     private Category category;
+    Note note;
     private Priority priority;
     private Status status;
     public Spinner spinner;
@@ -49,9 +50,13 @@ public class EditNote extends AppCompatDialogFragment  {
     public Spinner spinner2;
     private NoteDAO noteDAO;
     private NoteViewModel noteViewModel;
-    static int categoryID = 0;
-    static int priorityID = 0;
-    static int statusID = 0;
+    static String categoryName = "";
+    static String priorityName = "";
+    static String statusName = "";
+    public EditNote(Note note) {
+        this.note = note;
+    }
+
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -87,17 +92,16 @@ public class EditNote extends AppCompatDialogFragment  {
         //Status
         spinner2 = view.findViewById(R.id.sp_status);
         statusSpinner();
-        //Add status
+        //Update status
+        txt_planDate.setText(note.getPlantDate());
         EditText edt_noteName = view.findViewById(R.id.edt_noteName);
         Button btn_addStatus = view.findViewById(R.id.btn_addNote);
+        edt_noteName.setText(note.getNoteName());
         btn_addStatus.setText("Update");
         btn_addStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String noteName = edt_noteName.getText().toString().trim();
-                int categoryName = categoryID;
-                int priorityName = priorityID;
-                int statusName = statusID;
                 String planDate = txt_planDate.getText().toString().trim();
                 //date
                 SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -107,10 +111,13 @@ public class EditNote extends AppCompatDialogFragment  {
                     return;
                 }
                 noteDAO = NoteManagementDatabase.getInstance(v.getContext()).getNoteDAO();
-                Note note  = new Note(noteName,categoryName,priorityName,statusName,planDate,strCreateDate);
                 noteViewModel = new ViewModelProvider(getActivity()).get(NoteViewModel.class);
-                noteViewModel.insertNote(note);
-                Toast.makeText(v.getContext(),"Create note successfully",Toast.LENGTH_SHORT).show();
+                note.setNoteName(noteName);
+                note.setCategoryName(categoryName);
+                note.setPriorityName(priorityName);
+                note.setStatusName(statusName);
+                noteViewModel.updateNote(note);
+                Toast.makeText(v.getContext(),"Update note successfully",Toast.LENGTH_SHORT).show();
                 dismiss();
             }
         });
@@ -156,7 +163,7 @@ public class EditNote extends AppCompatDialogFragment  {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Category category= (Category) spinner.getSelectedItem();
-                categoryID = category.getId();
+                categoryName = category.getCategoryName();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -175,7 +182,7 @@ public class EditNote extends AppCompatDialogFragment  {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Priority priority= (Priority) spinner1.getSelectedItem();
-                priorityID = priority.getId();
+                priorityName = priority.getPriorityName();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -194,7 +201,7 @@ public class EditNote extends AppCompatDialogFragment  {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Status status= (Status) spinner2.getSelectedItem();
-                statusID = status.getId();
+                statusName = status.getStatusName();
 
             }
             @Override

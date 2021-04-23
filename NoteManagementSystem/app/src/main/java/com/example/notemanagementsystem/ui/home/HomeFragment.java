@@ -14,25 +14,50 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.anychart.AnyChart;
+import com.anychart.AnyChartView;
+import com.anychart.chart.common.dataentry.DataEntry;
+import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.anychart.charts.Pie;
+import com.example.notemanagementsystem.Data.CategoryDAO;
+import com.example.notemanagementsystem.Data.NoteDAO;
+import com.example.notemanagementsystem.Data.NoteManagementDatabase;
 import com.example.notemanagementsystem.R;
 import com.google.android.material.transition.Hold;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
+    private AnyChartView anyChartView;
+    private NoteDAO noteDAO;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
+        noteDAO = NoteManagementDatabase.getInstance(getContext()).getNoteDAO();
+        String [] status = {"Done","Pending","Processing"};
+        int[] percent = noteDAO.getPercent();
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        anyChartView= root.findViewById(R.id.chart);
+        setupPieChart(status,percent);
      return root;
     }
+
+    public void setupPieChart(String [] status,int[] percent) {
+        Pie pie = AnyChart.pie();
+        List<DataEntry> dataEntries = new ArrayList<>();
+
+        for(int i = 0; i<status.length;i++){
+            dataEntries.add(new ValueDataEntry(status[i],percent[i]));
+        }
+
+        pie.data(dataEntries);
+        anyChartView.setChart(pie);
+
+    }
+
 }
