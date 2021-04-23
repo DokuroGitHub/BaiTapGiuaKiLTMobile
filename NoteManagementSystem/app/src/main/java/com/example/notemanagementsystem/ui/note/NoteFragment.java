@@ -25,7 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class NoteFragment extends Fragment {
+public class NoteFragment extends Fragment implements NoteAdapter.ClickListener{
 
     private NoteViewModel noteViewModel;
     private FloatingActionButton btnNewNote;
@@ -37,7 +37,7 @@ public class NoteFragment extends Fragment {
         noteViewModel =
                 new ViewModelProvider(this).get(NoteViewModel.class);
         View root = inflater.inflate(R.layout.fragment_note, container, false);
-        noteAdapter = new NoteAdapter();
+        noteAdapter = new NoteAdapter(this);
         rcv_note = root.findViewById(R.id.rcv_note);
         rcv_note.setLayoutManager(new LinearLayoutManager(root.getContext()));
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
@@ -61,5 +61,10 @@ public class NoteFragment extends Fragment {
             }
         });
         return root;
+    }
+
+    @Override
+    public void ClickedItem(Note note) {
+
     }
 }

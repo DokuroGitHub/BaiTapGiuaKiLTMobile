@@ -20,6 +20,12 @@ import java.util.List;
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> {
     private Context context;
     private List<NoteAndMenu> mListNote;
+    private List<Note> mListNoteItem;
+    private ClickListener clickListener;
+
+    public NoteAdapter(ClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
 
     public void setData (List<NoteAndMenu> list){
         this.mListNote = list;
@@ -36,6 +42,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         NoteAndMenu note = mListNote.get(position);
+        Note noteItem = mListNoteItem.get(position);
         if (note == null){
             return;
         }
@@ -48,7 +55,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
         holder.item.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-
+                clickListener.ClickedItem(noteItem);
                 return false;
             }
         });
@@ -57,6 +64,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
     @Override
     public int getItemCount() {
         if(mListNote != null)
+            return mListNote.size();
+        if(mListNoteItem != null)
             return mListNote.size();
         return 0;
     }
@@ -75,5 +84,9 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
             txtCreateDate = itemView.findViewById(R.id.txtCreateDate);
             item = itemView.findViewById(R.id.note_item);
         }
+    }
+
+    public interface ClickListener{
+        void ClickedItem(Note note);
     }
 }
