@@ -56,7 +56,6 @@ public class HomeFragment extends Fragment {
         for(int i = 0; i<status.length;i++){
             dataEntries.add(new ValueDataEntry(status[i],percent[i]));
         }
-
         pie.data(dataEntries);
         anyChartView.setChart(pie);
 
