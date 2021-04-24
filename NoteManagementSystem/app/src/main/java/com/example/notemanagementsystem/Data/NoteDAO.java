@@ -30,6 +30,6 @@ public interface NoteDAO {
     @Query("SELECT * FROM Category")
     LiveData<List<NoteAndMenu>> getCategoryAndNote();
 
-
-
+    @Query("SELECT  statusName FROM Note GROUP BY statusName;")
+    String[] getStatus();
 }

@@ -49,7 +49,7 @@
         tools:layout="@layout/fragment_priority" />
     <fragment
         android:id="@+id/nav_editProfile"
-        android:name="com.example.notemanagementsystem.ui.editProfile.EditProfileFragment"
+        android:name="com.example.notemanagementsystem.ui.account.EditProfileFragment"
         android:label="fragment_editprofile"
         tools:layout="@layout/fragment_editprofile" >
         <action

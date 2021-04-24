@@ -4,10 +4,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.widget.TextView;
 
-import com.example.notemanagementsystem.Model.EditProfile;
 import com.example.notemanagementsystem.Model.User;
 import com.example.notemanagementsystem.ui.account.ChangePasswordFragment;
-import com.example.notemanagementsystem.ui.editProfile.EditProfileFragment;
+import com.example.notemanagementsystem.ui.account.EditProfileFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.fragment.app.FragmentTransaction;

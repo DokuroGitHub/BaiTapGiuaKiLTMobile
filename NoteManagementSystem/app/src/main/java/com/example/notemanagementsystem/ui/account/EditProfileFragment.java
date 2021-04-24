@@ -1,4 +1,4 @@
-package com.example.notemanagementsystem.ui.editProfile;
+package com.example.notemanagementsystem.ui.account;
 
 import android.os.Bundle;
 
@@ -14,10 +14,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.notemanagementsystem.DashboardActivity;
-import com.example.notemanagementsystem.Data.EditProfileDAO;
 import com.example.notemanagementsystem.Data.NoteManagementDatabase;
 import com.example.notemanagementsystem.Data.UserDAO;
-import com.example.notemanagementsystem.Model.EditProfile;
 import com.example.notemanagementsystem.Model.User;
 import com.example.notemanagementsystem.R;
 import com.example.notemanagementsystem.ui.account.AccountViewModel;

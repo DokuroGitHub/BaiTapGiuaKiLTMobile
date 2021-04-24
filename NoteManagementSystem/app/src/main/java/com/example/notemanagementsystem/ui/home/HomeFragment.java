@@ -39,7 +39,7 @@ public class HomeFragment extends Fragment {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
         noteDAO = NoteManagementDatabase.getInstance(getContext()).getNoteDAO();
-        String [] status = {"Done","Pending","Processing"};
+        String [] status = noteDAO.getStatus();
         int[] percent = noteDAO.getPercent();
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         anyChartView= root.findViewById(R.id.chart);
@@ -50,15 +50,15 @@ public class HomeFragment extends Fragment {
     }
 
     public void setupPieChart(String [] status,int[] percent) {
-//        Pie pie = AnyChart.pie();
-//        List<DataEntry> dataEntries = new ArrayList<>();
-//
-//        for(int i = 0; i<status.length;i++){
-//            dataEntries.add(new ValueDataEntry(status[i],percent[i]));
-//        }
-//
-//        pie.data(dataEntries);
-//        anyChartView.setChart(pie);
+        Pie pie = AnyChart.pie();
+        List<DataEntry> dataEntries = new ArrayList<>();
+
+        for(int i = 0; i<status.length;i++){
+            dataEntries.add(new ValueDataEntry(status[i],percent[i]));
+        }
+
+        pie.data(dataEntries);
+        anyChartView.setChart(pie);
 
     }
 

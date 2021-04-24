@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.editProfile.EditProfileFragment">
+    tools:context=".ui.account.EditProfileFragment">
 
     <TextView
         android:id="@+id/title"
@@ -39,6 +39,7 @@
         android:layout_below="@id/edt_lastName"
         android:hint="Enter your email"
         android:layout_marginTop="20dp"
+        android:enabled="false"
         android:layout_marginHorizontal="10dp" />
 
     <Button

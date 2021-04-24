@@ -4,12 +4,9 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.notemanagementsystem.Data.EditProfileDAO;
 import com.example.notemanagementsystem.Data.NoteDAO;
 import com.example.notemanagementsystem.Data.NoteManagementDatabase;
-import com.example.notemanagementsystem.Model.EditProfile;
 import com.example.notemanagementsystem.Model.Note;
-import com.example.notemanagementsystem.Model.NoteAndMenu;
 
 import java.util.List;
 
