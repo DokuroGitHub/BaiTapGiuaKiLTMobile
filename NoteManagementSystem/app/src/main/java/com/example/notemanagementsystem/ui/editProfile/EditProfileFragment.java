@@ -78,27 +78,10 @@ public class EditProfileFragment extends Fragment {
                     user.setEmail(newEmail);
                     accountViewModel.updateUser(user);
                     Toast.makeText(v.getContext(),"Update password successfully" + user.toString(),Toast.LENGTH_SHORT).show();
-//                    if(profile == null){
-//                        EditProfile profile = new EditProfile(newFirstName, newLastName, newEmail);
-//                        editViewModel.insertProfile(profile);
-//                        Toast.makeText(v.getContext(),"Insert profile successfully",Toast.LENGTH_SHORT).show();
-//                    }
-//                    else
-//                        editViewModel = new ViewModelProvider(getActivity()).get(EditViewModel.class);
-//                        profile = profileDAO.getEditProfile(newFirstName, newLastName, newEmail);
-//                        profile.setFirstName(newFirstName);
-//                        profile.setLastName(newLastName);
-//                        profile.setEmail(newEmail);
-//                        editViewModel.updateProfile(profile);
-//                        Toast.makeText(v.getContext(),"Update profile successfully" + profile.toString(),Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
         return root;
     }
 
-    private void update(){
-
-    }
 }

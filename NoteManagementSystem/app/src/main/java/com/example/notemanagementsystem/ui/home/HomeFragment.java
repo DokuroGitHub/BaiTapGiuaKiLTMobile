@@ -43,7 +43,9 @@ public class HomeFragment extends Fragment {
         int[] percent = noteDAO.getPercent();
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         anyChartView= root.findViewById(R.id.chart);
-        setupPieChart(status,percent);
+        if(percent != null)
+            setupPieChart(status,percent);
+
      return root;
     }
 

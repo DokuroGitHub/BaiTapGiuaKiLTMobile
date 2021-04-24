@@ -19,7 +19,7 @@ public class User implements Serializable {
     // now
     @Nullable
     private String lname;
-    @NonNull
+    @Nullable
     private String fname;
 
     public User(String email, String password, String lname, String fname) {
