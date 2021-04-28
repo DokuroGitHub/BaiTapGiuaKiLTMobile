@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.notemanagementsystem.Adapter.StatusAdapter;
+import com.example.notemanagementsystem.DashboardActivity;
 import com.example.notemanagementsystem.Model.Status;
 import com.example.notemanagementsystem.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -26,15 +27,17 @@ public class StatusFragment extends Fragment implements StatusAdapter.ClickListe
     private StatusAdapter statusAdapter;
     private List<Status> mListStatus;
     private FloatingActionButton btnNewStatus;
+    static int userID;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
+        getDataFromDB();
         View root = inflater.inflate(R.layout.fragment_status, container, false);
         statusAdapter = new StatusAdapter(this);
         rcv_Status = root.findViewById(R.id.rcv_status);
         rcv_Status.setLayoutManager(new LinearLayoutManager(root.getContext()));
         statusModel = new ViewModelProvider(this).get(StatusViewModel.class);
-        statusModel.getListStatus().observe(getActivity(), new Observer<List<Status>>() {
+        statusModel.getListStatus(userID).observe(getActivity(), new Observer<List<Status>>() {
             @Override
             public void onChanged(List<Status> statuses) {
                 if(statuses.size()>0){
@@ -48,7 +51,7 @@ public class StatusFragment extends Fragment implements StatusAdapter.ClickListe
         btnNewStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Add_dialog_status add = new Add_dialog_status();
+                Add_dialog_status add = new Add_dialog_status(userID);
                 add.show(getActivity().getSupportFragmentManager(),"add");
             }
         });
@@ -64,5 +67,12 @@ public class StatusFragment extends Fragment implements StatusAdapter.ClickListe
     @Override
     public void deleteClicked(Status status) {
         statusModel.deleteStatus(status);
+    }
+
+    public void getDataFromDB(){
+        DashboardActivity dashboardActivity = new DashboardActivity();
+        DashboardActivity activity = (DashboardActivity)getActivity();
+        Bundle results = activity.getMyData();
+        userID = results.getInt("userID");
     }
 }

@@ -32,6 +32,12 @@ public class Add_dialog_category extends AppCompatDialogFragment {
     private CategoryDAO categoryDAO;
     private RecyclerView rcv_Category;
     private CategoryModel categoryModel;
+    static int userID;
+
+    public Add_dialog_category(int userID){
+        this.userID = userID;
+    }
+
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -55,7 +61,7 @@ public class Add_dialog_category extends AppCompatDialogFragment {
                 }
                 //insert
                 categoryDAO = NoteManagementDatabase.getInstance(v.getContext()).getCategoryDAO();
-                Category category = new Category(strCategoryName,strCreateDate);
+                Category category = new Category(strCategoryName,strCreateDate,userID);
                 categoryModel = new ViewModelProvider(getActivity()).get(CategoryModel.class);
                 categoryModel.insertCategory(category);
                 Toast.makeText(v.getContext(),"Create category successfully",Toast.LENGTH_SHORT).show();

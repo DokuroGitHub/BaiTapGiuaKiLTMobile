@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.notemanagementsystem.Adapter.CategoryAdapter;
+import com.example.notemanagementsystem.DashboardActivity;
 import com.example.notemanagementsystem.Model.Category;
 import com.example.notemanagementsystem.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -26,15 +27,17 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.ClickL
     private CategoryAdapter categoryAdapter;
     private List<Category> mListCategory;
     private FloatingActionButton btnNewCategory;
+    static int userID;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
+        //take userID
+        getDataFromDB();
         View root = inflater.inflate(R.layout.fragment_category, container, false);
         categoryAdapter = new CategoryAdapter(this);
         rcv_Category = root.findViewById(R.id.rcv_category);
         rcv_Category.setLayoutManager(new LinearLayoutManager(root.getContext()));
         categoryModel = new ViewModelProvider(this).get(CategoryModel.class);
-        categoryModel.getListCategory().observe(getActivity(), new Observer<List<Category>>() {
+        categoryModel.getListCategory(userID).observe(getActivity(), new Observer<List<Category>>() {
             @Override
             public void onChanged(List<Category> categories) {
                 if(categories.size()>0){
@@ -48,7 +51,7 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.ClickL
         btnNewCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Add_dialog_category add = new Add_dialog_category();
+                Add_dialog_category add = new Add_dialog_category(userID);
                 add.show(getActivity().getSupportFragmentManager(),"add");
             }
         });
@@ -65,5 +68,12 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.ClickL
     @Override
     public void deleteClicked(Category category) {
         categoryModel.deleteCategory(category);
+    }
+
+    public void getDataFromDB(){
+        DashboardActivity dashboardActivity = new DashboardActivity();
+        DashboardActivity activity = (DashboardActivity)getActivity();
+        Bundle results = activity.getMyData();
+        userID = results.getInt("userID");
     }
 }

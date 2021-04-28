@@ -14,14 +14,15 @@ public class StatusRepository {
     private StatusDAO statusDAO;
     NoteManagementDatabase db;
     private LiveData<List<Status>> mListStatus;
+    private int userID;
 
     public StatusRepository(Application application) {
         db = NoteManagementDatabase.getInstance(application);
         statusDAO = db.getStatusDAO();
-        mListStatus = statusDAO.getListStatus();
+        mListStatus = statusDAO.getListStatus(userID);
     }
-    public LiveData<List<Status>> getListStatus(){
-        return statusDAO.getListStatus();
+    public LiveData<List<Status>> getListStatus(final int userID){
+        return statusDAO.getListStatus(userID);
     }
 
     public void insertStatus(final Status status){

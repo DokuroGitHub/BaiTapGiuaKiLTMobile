@@ -16,15 +16,16 @@ import java.util.List;
 public class PriorityModel extends AndroidViewModel {
     private PriorityRepository priorityRepository;
     LiveData<List<Priority>> mListPriority;
+    private int userID;
 
     public PriorityModel(@NonNull Application application) {
         super(application);
         priorityRepository = new PriorityRepository(application);
-        mListPriority = priorityRepository.getListPriority();
+        mListPriority = priorityRepository.getListPriority(userID);
     }
 
-    public LiveData<List<Priority>> getListPriority() {
-        return priorityRepository.getListPriority();
+    public LiveData<List<Priority>> getListPriority(final int userID) {
+        return priorityRepository.getListPriority(userID);
     }
 
     public List<Priority> getListPriorityDF() {

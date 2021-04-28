@@ -32,6 +32,11 @@ public class Add_dialog_priority extends AppCompatDialogFragment {
     private PriorityDAO priorityDAO;
     private RecyclerView rcv_Priority;
     private PriorityModel priorityModel;
+    static int userID;
+
+    public Add_dialog_priority(int userID){
+        this.userID = userID;
+    }
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -55,7 +60,7 @@ public class Add_dialog_priority extends AppCompatDialogFragment {
                     return;
                 }
                 priorityDAO = NoteManagementDatabase.getInstance(v.getContext()).getPriorityDAO();
-                Priority priority = new Priority(strPriorityName,strCreateDate);
+                Priority priority = new Priority(strPriorityName,strCreateDate,userID);
                 priorityModel = new ViewModelProvider(getActivity()).get(PriorityModel.class);
                 priorityModel.insertPriority(priority);
                 Toast.makeText(v.getContext(),"Create priority successfully",Toast.LENGTH_SHORT).show();

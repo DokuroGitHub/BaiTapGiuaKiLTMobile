@@ -17,15 +17,16 @@ import java.util.List;
 public class StatusViewModel extends AndroidViewModel {
     private static StatusRepository statusRepository;
     LiveData<List<Status>> mListStatus;
+    private int userID;
 
     public StatusViewModel(@NonNull Application application){
         super(application);
         statusRepository = new StatusRepository(application);
-        mListStatus = statusRepository.getListStatus();
+        mListStatus = statusRepository.getListStatus(userID);
     }
 
-    public LiveData<List<Status>> getListStatus(){
-        return statusRepository.getListStatus();
+    public LiveData<List<Status>> getListStatus(final int userID){
+        return statusRepository.getListStatus(userID);
     }
 
     public List<Status> getListStatusDF(){

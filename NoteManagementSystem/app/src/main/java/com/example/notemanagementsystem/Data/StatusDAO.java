@@ -26,6 +26,6 @@ public interface StatusDAO {
     @Delete
     void delete(Status status);
 
-    @Query("SELECT * FROM Status")
-    LiveData<List<Status>> getListStatus();
+    @Query("SELECT * FROM Status where userID = :userID")
+    LiveData<List<Status>> getListStatus(int userID);
 }

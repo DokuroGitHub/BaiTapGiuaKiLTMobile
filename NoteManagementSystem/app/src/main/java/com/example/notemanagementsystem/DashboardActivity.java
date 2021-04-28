@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.example.notemanagementsystem.Model.User;
 import com.example.notemanagementsystem.ui.account.ChangePasswordFragment;
 import com.example.notemanagementsystem.ui.account.EditProfileFragment;
+import com.example.notemanagementsystem.ui.category.CategoryFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.fragment.app.FragmentTransaction;
@@ -50,8 +51,6 @@ public class DashboardActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.dashboard, menu);
         user = (User)getIntent().getSerializableExtra("UserRepository");
         txtUser = (TextView)findViewById(R.id.txtUser);
-
-
         if (user != null)
             txtUser.setText(user.getEmail());
         //send data to fragment
@@ -72,13 +71,11 @@ public class DashboardActivity extends AppCompatActivity {
 
     public Bundle getMyData() {
         user = (User)getIntent().getSerializableExtra("UserRepository");
-        txtUser = (TextView)findViewById(R.id.txtUser);
-        if (user != null)
-            txtUser.setText(user.getEmail());
         //send data to fragment
         FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
         Bundle hm = new Bundle();
         hm.putString("val1",user.getEmail());
+        hm.putInt("userID",user.getId());
         return hm;
     }
 

@@ -16,15 +16,16 @@ import java.util.List;
 public class CategoryModel extends AndroidViewModel {
     private CategoryRepository categoryRepository;
     LiveData<List<Category>> mListCategory;
+    private int userID;
 
     public CategoryModel(@NonNull Application application){
         super(application);
         categoryRepository = new CategoryRepository(application);
-        mListCategory = categoryRepository.getListCategory();
+        mListCategory = categoryRepository.getListCategory(userID);
     }
 
-    public LiveData<List<Category>> getListCategory(){
-        return categoryRepository.getListCategory();
+    public LiveData<List<Category>> getListCategory(final int userID){
+        return categoryRepository.getListCategory(userID);
     }
 
     public List<Category> getListCategories(){

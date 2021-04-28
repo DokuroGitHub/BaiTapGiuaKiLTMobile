@@ -19,6 +19,7 @@ import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Pie;
+import com.example.notemanagementsystem.DashboardActivity;
 import com.example.notemanagementsystem.Data.CategoryDAO;
 import com.example.notemanagementsystem.Data.NoteDAO;
 import com.example.notemanagementsystem.Data.NoteManagementDatabase;
@@ -33,18 +34,18 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private AnyChartView anyChartView;
     private NoteDAO noteDAO;
+    static int userID;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+
+        getDataFromDB();
         noteDAO = NoteManagementDatabase.getInstance(getContext()).getNoteDAO();
-        String [] status = noteDAO.getStatus();
-        int[] percent = noteDAO.getPercent();
+        String [] status = noteDAO.getStatus(userID);
+        int[] percent = noteDAO.getPercent(userID);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         anyChartView= root.findViewById(R.id.chart);
-        if(percent != null)
-            setupPieChart(status,percent);
+        setupPieChart(status,percent);
 
      return root;
     }
@@ -58,7 +59,13 @@ public class HomeFragment extends Fragment {
         }
         pie.data(dataEntries);
         anyChartView.setChart(pie);
+    }
 
+    public void getDataFromDB(){
+        DashboardActivity dashboardActivity = new DashboardActivity();
+        DashboardActivity activity = (DashboardActivity)getActivity();
+        Bundle results = activity.getMyData();
+        userID = results.getInt("userID");
     }
 
 }

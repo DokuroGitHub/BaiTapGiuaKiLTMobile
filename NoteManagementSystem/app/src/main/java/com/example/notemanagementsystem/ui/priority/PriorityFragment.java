@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.notemanagementsystem.Adapter.PriorityAdapter;
+import com.example.notemanagementsystem.DashboardActivity;
 import com.example.notemanagementsystem.Model.Priority;
 import com.example.notemanagementsystem.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -26,14 +27,17 @@ public class PriorityFragment extends Fragment implements PriorityAdapter.ClickL
     private PriorityAdapter priorityAdapter;
     private List<Priority> mListPriority;
     private FloatingActionButton btnNewPriority;
+    static int userID;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        getDataFromDB();
         View root = inflater.inflate(R.layout.fragment_priority, container, false);
         priorityAdapter = new PriorityAdapter(this);
         rcv_Priority = root.findViewById(R.id.rcv_priority);
         rcv_Priority.setLayoutManager(new LinearLayoutManager(root.getContext()));
         priorityModel = new ViewModelProvider(this).get(PriorityModel.class);
-        priorityModel.getListPriority().observe(getActivity(), new Observer<List<Priority>>() {
+        priorityModel.getListPriority(userID).observe(getActivity(), new Observer<List<Priority>>() {
             @Override
             public void onChanged(List<Priority> priorities) {
                 if(priorities.size()>0){
@@ -47,7 +51,7 @@ public class PriorityFragment extends Fragment implements PriorityAdapter.ClickL
         btnNewPriority.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Add_dialog_priority add = new Add_dialog_priority();
+                Add_dialog_priority add = new Add_dialog_priority(userID);
                 add.show(getActivity().getSupportFragmentManager(),"add");
             }
         });
@@ -62,5 +66,12 @@ public class PriorityFragment extends Fragment implements PriorityAdapter.ClickL
     @Override
     public void deleteClicked(Priority priority) {
         priorityModel.deletePriority(priority);
+    }
+
+    public void getDataFromDB(){
+        DashboardActivity dashboardActivity = new DashboardActivity();
+        DashboardActivity activity = (DashboardActivity)getActivity();
+        Bundle results = activity.getMyData();
+        userID = results.getInt("userID");
     }
 }

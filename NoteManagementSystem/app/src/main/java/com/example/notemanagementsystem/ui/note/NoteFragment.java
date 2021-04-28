@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.notemanagementsystem.Adapter.NoteAdapter;
+import com.example.notemanagementsystem.DashboardActivity;
 import com.example.notemanagementsystem.Model.Category;
 import com.example.notemanagementsystem.Model.Note;
 import com.example.notemanagementsystem.Model.NoteAndMenu;
@@ -32,17 +33,17 @@ public class NoteFragment extends Fragment implements NoteAdapter.ClickListener{
     private FloatingActionButton btnNewNote;
     private NoteAdapter noteAdapter;
     private RecyclerView rcv_note;
+    static int userID;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        noteViewModel =
-                new ViewModelProvider(this).get(NoteViewModel.class);
+        getDataFromDB();
         View root = inflater.inflate(R.layout.fragment_note, container, false);
         noteAdapter = new NoteAdapter(this);
         rcv_note = root.findViewById(R.id.rcv_note);
         rcv_note.setLayoutManager(new LinearLayoutManager(root.getContext()));
         noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
-        noteViewModel.getListNote().observe(getActivity(), new Observer<List<Note>>() {
+        noteViewModel.getListNote(userID).observe(getActivity(), new Observer<List<Note>>() {
             @Override
             public void onChanged(List<Note> notes) {
                 if(notes.size()>0){
@@ -57,7 +58,7 @@ public class NoteFragment extends Fragment implements NoteAdapter.ClickListener{
         btnNewNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Add_dialog_note add = new Add_dialog_note();
+                Add_dialog_note add = new Add_dialog_note(userID);
                 add.show(getActivity().getSupportFragmentManager(),"add");
             }
         });
@@ -68,5 +69,12 @@ public class NoteFragment extends Fragment implements NoteAdapter.ClickListener{
     public void ClickedItem(Note note) {
         EditNote edit = new EditNote(note);
         edit.show(getActivity().getSupportFragmentManager(),"edit");
+    }
+
+    public void getDataFromDB(){
+        DashboardActivity dashboardActivity = new DashboardActivity();
+        DashboardActivity activity = (DashboardActivity)getActivity();
+        Bundle results = activity.getMyData();
+        userID = results.getInt("userID");
     }
 }

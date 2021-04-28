@@ -14,15 +14,16 @@ public class PriorityRepository {
     private PriorityDAO priorityDAO;
     NoteManagementDatabase db;
     private LiveData<List<Priority>> mListPriority;
+    private int userID;
 
     public PriorityRepository(Application application) {
         db = NoteManagementDatabase.getInstance(application);
         priorityDAO = db.getPriorityDAO();
-        mListPriority = priorityDAO.getListPriority();
+        mListPriority = priorityDAO.getListPriority(userID);
     }
 
-    public LiveData<List<Priority>> getListPriority() {
-        return priorityDAO.getListPriority();
+    public LiveData<List<Priority>> getListPriority(final int userID) {
+        return priorityDAO.getListPriority(userID);
     }
 
     public List<Priority> getListPriorityDF() {

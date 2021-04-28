@@ -14,15 +14,16 @@ public class NoteRepository {
     private NoteDAO noteDAO;
     NoteManagementDatabase db;
     private LiveData<List<Note>> mListNote;
+    private int userID;
 
 
     public NoteRepository(Application application) {
         db = NoteManagementDatabase.getInstance(application);
         noteDAO = db.getNoteDAO();
-        mListNote = noteDAO.getListNote();
+        mListNote = noteDAO.getListNote(userID);
 //        mListStatus = statusDAO.getListStatus();
     }
-    public LiveData<List<Note>> getListNote(){return noteDAO.getListNote();}
+    public LiveData<List<Note>> getListNote(final int userID){return noteDAO.getListNote(userID);}
     public void insertNote (final Note note){
         NoteManagementDatabase.databaseWriteExecutor.execute(() -> {
             noteDAO.insert(note);

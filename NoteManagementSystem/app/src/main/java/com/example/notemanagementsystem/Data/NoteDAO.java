@@ -20,16 +20,16 @@ public interface NoteDAO {
     @Update
     void update(Note note);
 
-    @Query("SELECT * FROM Note")
-    LiveData<List<Note>> getListNote();
+    @Query("SELECT * FROM Note where userID = :userID")
+    LiveData<List<Note>> getListNote(int userID);
 
-    @Query("SELECT  COUNT(*) FROM Note GROUP BY statusName;")
-    int [] getPercent();
+    @Query("SELECT  COUNT(*) FROM Note where userID =:userID GROUP BY statusName;")
+    int [] getPercent(int userID);
 
     @Transaction
     @Query("SELECT * FROM Category")
     LiveData<List<NoteAndMenu>> getCategoryAndNote();
 
-    @Query("SELECT  statusName FROM Note GROUP BY statusName;")
-    String[] getStatus();
+    @Query("SELECT  statusName FROM Note where userID =:userID GROUP BY statusName;")
+    String[] getStatus(int userID);
 }

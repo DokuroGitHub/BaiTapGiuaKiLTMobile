@@ -22,8 +22,8 @@ public interface PriorityDAO {
     @Delete
     void delete(Priority priority);
 
-    @Query("SELECT * FROM Priority")
-    LiveData<List<Priority>> getListPriority();
+    @Query("SELECT * FROM Priority where userID = :userID")
+    LiveData<List<Priority>> getListPriority(int userID);
 
     @Query("SELECT * FROM Priority")
     List<Priority> getListPriorityDF();

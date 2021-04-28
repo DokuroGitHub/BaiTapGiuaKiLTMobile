@@ -16,15 +16,16 @@ public class CategoryRepository {
     private CategoryDAO categoryDAO;
     NoteManagementDatabase db;
     private LiveData<List<Category>> mListCategory;
+    private int userID;
 
     public CategoryRepository(Application application) {
         db = NoteManagementDatabase.getInstance(application);
         categoryDAO = db.getCategoryDAO();
-        mListCategory = categoryDAO.getListCategory();
+        mListCategory = categoryDAO.getListCategory(userID);
     }
 
-    public LiveData<List<Category>> getListCategory(){
-        return categoryDAO.getListCategory();
+    public LiveData<List<Category>> getListCategory(final int userID){
+        return categoryDAO.getListCategory(userID);
     }
 
     public List<Category> getListCategories(){return categoryDAO.getListCategories();}

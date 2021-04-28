@@ -50,6 +50,11 @@ public class Add_dialog_note extends AppCompatDialogFragment  {
     static String categoryName = "";
     static String priorityName = "";
     static String statusName = "";
+    static int userID;
+
+    public Add_dialog_note(int userID) {
+        this.userID = userID;
+    }
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -101,7 +106,7 @@ public class Add_dialog_note extends AppCompatDialogFragment  {
                     return;
                 }
                 noteDAO = NoteManagementDatabase.getInstance(v.getContext()).getNoteDAO();
-                Note note  = new Note(noteName,categoryName,priorityName,statusName,planDate,strCreateDate);
+                Note note  = new Note(noteName,categoryName,priorityName,statusName,planDate,strCreateDate,userID);
                 noteViewModel = new ViewModelProvider(getActivity()).get(NoteViewModel.class);
                 noteViewModel.insertNote(note);
                 Toast.makeText(v.getContext(),"Create note successfully",Toast.LENGTH_SHORT).show();

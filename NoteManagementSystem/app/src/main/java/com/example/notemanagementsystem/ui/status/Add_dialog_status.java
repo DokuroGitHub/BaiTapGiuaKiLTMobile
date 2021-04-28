@@ -32,6 +32,11 @@ public class Add_dialog_status extends AppCompatDialogFragment {
     private StatusDAO statusDAO;
     private RecyclerView rcv_Status;
     private StatusViewModel statusModel;
+    static int userID;
+
+    public Add_dialog_status(int userID){
+        this.userID = userID;
+    }
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -57,7 +62,7 @@ public class Add_dialog_status extends AppCompatDialogFragment {
 
                 //insert
                 statusDAO = NoteManagementDatabase.getInstance(v.getContext()).getStatusDAO();
-                Status status = new Status(strStatusName,strCreateDate);
+                Status status = new Status(strStatusName,strCreateDate,userID);
                 statusModel = new ViewModelProvider(getActivity()).get(StatusViewModel.class);
                 statusModel.insertStatus(status);
                 Toast.makeText(v.getContext(),"Create status successfully",Toast.LENGTH_SHORT).show();
