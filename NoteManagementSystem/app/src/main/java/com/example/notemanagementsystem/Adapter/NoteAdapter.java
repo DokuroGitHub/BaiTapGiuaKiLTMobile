@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.notemanagementsystem.Data.NoteDAO;
+import com.example.notemanagementsystem.Data.NoteManagementDatabase;
 import com.example.notemanagementsystem.Model.Category;
 import com.example.notemanagementsystem.Model.Note;
 import com.example.notemanagementsystem.Model.NoteAndMenu;
@@ -21,6 +23,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
     private Context context;
     private List<Note> mListNoteItem;
     private ClickListener clickListener;
+    private NoteDAO noteDAO;
 
     public NoteAdapter(ClickListener clickListener) {
         this.clickListener = clickListener;
@@ -35,6 +38,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
         View view  = LayoutInflater.from(parent.getContext()).inflate(R.layout.note_item,parent,false);
+        noteDAO = NoteManagementDatabase.getInstance(parent.getContext()).getNoteDAO();
         return new MyViewHolder(view);
     }
 
@@ -45,9 +49,9 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
             return;
         }
         holder.txtNoteName.setText("Name: " + note.getNoteName());
-        holder.txtCategoryName.setText("Category: "+note.getCategoryName());
-        holder.txtPriorityName.setText("Priority: "+note.getPriorityName());
-        holder.txtStatusName.setText("Status: "+note.getStatusName());
+        holder.txtCategoryName.setText("Category: "+noteDAO.getCategoryName(note.getCategoryID()));
+        holder.txtPriorityName.setText("Priority: "+noteDAO.getPriorityName(note.getPriorityID()));
+        holder.txtStatusName.setText("Status: "+noteDAO.getStatusName(note.getStatusID()));
         holder.txtPlanDate.setText("Plan date: " + note.getPlantDate());
         holder.txtCreateDate.setText("Create date: "+note.getCurrentDate().toString());
         holder.item.setOnLongClickListener(new View.OnLongClickListener() {

@@ -50,9 +50,9 @@ public class EditNote extends AppCompatDialogFragment  {
     public Spinner spinner2;
     private NoteDAO noteDAO;
     private NoteViewModel noteViewModel;
-    static String categoryName = "";
-    static String priorityName = "";
-    static String statusName = "";
+    static int categoryID ;
+    static int priorityID ;
+    static int statusID;
     public EditNote(Note note) {
         this.note = note;
     }
@@ -113,9 +113,9 @@ public class EditNote extends AppCompatDialogFragment  {
                 noteDAO = NoteManagementDatabase.getInstance(v.getContext()).getNoteDAO();
                 noteViewModel = new ViewModelProvider(getActivity()).get(NoteViewModel.class);
                 note.setNoteName(noteName);
-                note.setCategoryName(categoryName);
-                note.setPriorityName(priorityName);
-                note.setStatusName(statusName);
+                note.setCategoryID(categoryID);
+                note.setPriorityID(priorityID);
+                note.setStatusID(statusID);
                 noteViewModel.updateNote(note);
                 Toast.makeText(v.getContext(),"Update note successfully",Toast.LENGTH_SHORT).show();
                 dismiss();
@@ -163,7 +163,7 @@ public class EditNote extends AppCompatDialogFragment  {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Category category= (Category) spinner.getSelectedItem();
-                categoryName = category.getCategoryName();
+                categoryID = category.getId();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -182,7 +182,7 @@ public class EditNote extends AppCompatDialogFragment  {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Priority priority= (Priority) spinner1.getSelectedItem();
-                priorityName = priority.getPriorityName();
+                priorityID = priority.getId();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -201,7 +201,7 @@ public class EditNote extends AppCompatDialogFragment  {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Status status= (Status) spinner2.getSelectedItem();
-                statusName = status.getStatusName();
+                statusID = status.getId();
 
             }
             @Override

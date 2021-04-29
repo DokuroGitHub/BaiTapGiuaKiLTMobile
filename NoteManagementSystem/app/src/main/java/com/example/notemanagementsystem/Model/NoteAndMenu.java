@@ -3,68 +3,29 @@ package com.example.notemanagementsystem.Model;
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
+import java.util.List;
+
 public class NoteAndMenu {
-    private String noteName;
-    private String categoryName;
-    private String priorityName;
-    private String statusName;
-    private String plantDate;
-    private String currentDate;
 
-    public NoteAndMenu(String noteName, String categoryName, String priorityName, String statusName, String plantDate, String currentDate) {
-        this.noteName = noteName;
-        this.categoryName = categoryName;
-        this.priorityName = priorityName;
-        this.statusName = statusName;
-        this.plantDate = plantDate;
-        this.currentDate = currentDate;
+    @Embedded
+    Category category;
+
+    @Relation(parentColumn = "id", entityColumn = "categoryID", entity = Note.class)
+    public List<Note> note;
+
+    public Category getCategory() {
+        return category;
     }
 
-    public String getNoteName() {
-        return noteName;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
-    public void setNoteName(String noteName) {
-        this.noteName = noteName;
+    public List<Note> getNote() {
+        return note;
     }
 
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public String getPriorityName() {
-        return priorityName;
-    }
-
-    public void setPriorityName(String priorityName) {
-        this.priorityName = priorityName;
-    }
-
-    public String getStatusName() {
-        return statusName;
-    }
-
-    public void setStatusName(String statusName) {
-        this.statusName = statusName;
-    }
-
-    public String getPlantDate() {
-        return plantDate;
-    }
-
-    public void setPlantDate(String plantDate) {
-        this.plantDate = plantDate;
-    }
-
-    public String getCurrentDate() {
-        return currentDate;
-    }
-
-    public void setCurrentDate(String currentDate) {
-        this.currentDate = currentDate;
+    public void setNote(List<Note> note) {
+        this.note = note;
     }
 }

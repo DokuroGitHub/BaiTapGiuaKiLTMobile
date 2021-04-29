@@ -7,35 +7,45 @@ import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
-@Entity(foreignKeys = {@ForeignKey(entity = User.class,
-        parentColumns = "id",
-        childColumns = "userID",
-        onDelete = ForeignKey.CASCADE)})
+@Entity(foreignKeys = {
+        @ForeignKey(
+                entity = User.class,
+                parentColumns = "id",
+                childColumns = "userID",
+                onDelete = ForeignKey.CASCADE),
+        @ForeignKey(
+                entity = Category.class,
+                parentColumns = "id",
+                childColumns = "categoryID",
+                onDelete = ForeignKey.CASCADE),
+        @ForeignKey(
+                entity = Priority.class,
+                parentColumns = "id",
+                childColumns = "priorityID",
+                onDelete = ForeignKey.CASCADE),
+        @ForeignKey(
+                entity = Status.class,
+                parentColumns = "id",
+                childColumns = "statusID",
+                onDelete = ForeignKey.CASCADE),
+})
 public class Note implements Serializable {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     private int id;
     private String noteName;
-    private String categoryName;
-    private String priorityName;
-    private String statusName;
+    private int categoryID;
+    private int priorityID;
+    private int statusID;
     private String plantDate;
     private String currentDate;
     private int userID;
 
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
-
-    public Note(String noteName, String categoryName, String priorityName, String statusName, String plantDate, String currentDate, int userID) {
+    public Note(String noteName, int categoryID, int priorityID, int statusID, String plantDate, String currentDate, int userID) {
         this.noteName = noteName;
-        this.categoryName = categoryName;
-        this.priorityName = priorityName;
-        this.statusName = statusName;
+        this.categoryID = categoryID;
+        this.priorityID = priorityID;
+        this.statusID = statusID;
         this.plantDate = plantDate;
         this.currentDate = currentDate;
         this.userID = userID;
@@ -57,28 +67,28 @@ public class Note implements Serializable {
         this.noteName = noteName;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public int getCategoryID() {
+        return categoryID;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
     }
 
-    public String getPriorityName() {
-        return priorityName;
+    public int getPriorityID() {
+        return priorityID;
     }
 
-    public void setPriorityName(String priorityName) {
-        this.priorityName = priorityName;
+    public void setPriorityID(int priorityID) {
+        this.priorityID = priorityID;
     }
 
-    public String getStatusName() {
-        return statusName;
+    public int getStatusID() {
+        return statusID;
     }
 
-    public void setStatusName(String statusName) {
-        this.statusName = statusName;
+    public void setStatusID(int statusID) {
+        this.statusID = statusID;
     }
 
     public String getPlantDate() {
@@ -95,5 +105,13 @@ public class Note implements Serializable {
 
     public void setCurrentDate(String currentDate) {
         this.currentDate = currentDate;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 }

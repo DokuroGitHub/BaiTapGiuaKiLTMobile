@@ -47,9 +47,9 @@ public class Add_dialog_note extends AppCompatDialogFragment  {
     public Spinner spinner2;
     private NoteDAO noteDAO;
     private NoteViewModel noteViewModel;
-    static String categoryName = "";
-    static String priorityName = "";
-    static String statusName = "";
+    static int categoryID;
+    static int priorityID;
+    static int statusID;
     static int userID;
 
     public Add_dialog_note(int userID) {
@@ -106,7 +106,7 @@ public class Add_dialog_note extends AppCompatDialogFragment  {
                     return;
                 }
                 noteDAO = NoteManagementDatabase.getInstance(v.getContext()).getNoteDAO();
-                Note note  = new Note(noteName,categoryName,priorityName,statusName,planDate,strCreateDate,userID);
+                Note note  = new Note(noteName,categoryID,priorityID,statusID,planDate,strCreateDate,userID);
                 noteViewModel = new ViewModelProvider(getActivity()).get(NoteViewModel.class);
                 noteViewModel.insertNote(note);
                 Toast.makeText(v.getContext(),"Create note successfully",Toast.LENGTH_SHORT).show();
@@ -155,7 +155,7 @@ public class Add_dialog_note extends AppCompatDialogFragment  {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Category category= (Category) spinner.getSelectedItem();
-                categoryName = category.getCategoryName();
+                categoryID = category.getId();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -174,7 +174,7 @@ public class Add_dialog_note extends AppCompatDialogFragment  {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Priority priority= (Priority) spinner1.getSelectedItem();
-                priorityName = priority.getPriorityName();
+                priorityID = priority.getId();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -193,7 +193,7 @@ public class Add_dialog_note extends AppCompatDialogFragment  {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Status status= (Status) spinner2.getSelectedItem();
-                statusName = status.getStatusName();
+                statusID = status.getId();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {

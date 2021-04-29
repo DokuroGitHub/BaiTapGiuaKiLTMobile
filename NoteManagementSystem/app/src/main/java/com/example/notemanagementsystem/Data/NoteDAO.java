@@ -23,13 +23,21 @@ public interface NoteDAO {
     @Query("SELECT * FROM Note where userID = :userID")
     LiveData<List<Note>> getListNote(int userID);
 
-    @Query("SELECT  COUNT(*) FROM Note where userID =:userID GROUP BY statusName;")
+    @Query("SELECT categoryName From Category where id =:categoryID")
+    public String getCategoryName(int categoryID);
+
+    @Query("SELECT priorityName From Priority where id =:categoryID")
+    public String getPriorityName(int categoryID);
+
+    @Query("SELECT statusName From Status where id =:categoryID")
+    public String getStatusName(int categoryID);
+
+    @Query("SELECT  COUNT(*) FROM Note,Status where Note.userID = :userID and statusID = Status.id GROUP BY statusName")
     int [] getPercent(int userID);
 
-    @Transaction
     @Query("SELECT * FROM Category")
-    LiveData<List<NoteAndMenu>> getCategoryAndNote();
+    public NoteAndMenu getCategoryAndNote();
 
-    @Query("SELECT  statusName FROM Note where userID =:userID GROUP BY statusName;")
+    @Query("SELECT  statusName FROM Note,status where Note.userID =:userID and statusID = Status.id GROUP BY statusName")
     String[] getStatus(int userID);
 }
