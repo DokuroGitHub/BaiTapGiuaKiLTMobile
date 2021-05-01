@@ -83,6 +83,7 @@ public class EditNote extends AppCompatDialogFragment  {
          * Status
          * take id from name
          */
+        noteDAO = NoteManagementDatabase.getInstance(getContext()).getNoteDAO();
         //Category
         spinner = view.findViewById(R.id.sp_category);
         categorySpinner();
@@ -159,6 +160,9 @@ public class EditNote extends AppCompatDialogFragment  {
         categories = categoryModel.getListCategories();
         final ArrayAdapter arrayAdapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,categories);
         spinner.setAdapter(arrayAdapter);
+        //bind data from note
+        spinner.setSelection(getIndex(spinner,noteDAO.getCategoryName(note.getCategoryID())));
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -178,6 +182,9 @@ public class EditNote extends AppCompatDialogFragment  {
         priorities = priorityModel.getListPriorityDF();
         final ArrayAdapter arrayAdapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,priorities);
         spinner1.setAdapter(arrayAdapter);
+        //bind data from note
+        spinner1.setSelection(getIndex(spinner1,noteDAO.getPriorityName(note.getPriorityID())));
+
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -197,12 +204,14 @@ public class EditNote extends AppCompatDialogFragment  {
         mListStatus = statusViewModel.getListStatusDF();
         final ArrayAdapter arrayAdapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,mListStatus);
         spinner2.setAdapter(arrayAdapter);
+        //bind data from note
+        spinner2.setSelection(getIndex(spinner2,noteDAO.getStatusName(note.getStatusID())));
+
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Status status= (Status) spinner2.getSelectedItem();
                 statusID = status.getId();
-
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -211,6 +220,18 @@ public class EditNote extends AppCompatDialogFragment  {
         });
     }
 
+    /*
+    Set item for spinner
+    Compare with string in list array
+    **/
+    private int getIndex(Spinner spinner, String myString){
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                return i;
+            }
+        }
+        return 0;
+    }
 
 
 

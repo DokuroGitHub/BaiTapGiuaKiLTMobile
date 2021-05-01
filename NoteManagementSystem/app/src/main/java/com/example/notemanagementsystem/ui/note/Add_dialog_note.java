@@ -105,15 +105,19 @@ public class Add_dialog_note extends AppCompatDialogFragment  {
                 if(TextUtils.isEmpty(noteName)){
                     return;
                 }
-                noteDAO = NoteManagementDatabase.getInstance(v.getContext()).getNoteDAO();
-                Note note  = new Note(noteName,categoryID,priorityID,statusID,planDate,strCreateDate,userID);
-                noteViewModel = new ViewModelProvider(getActivity()).get(NoteViewModel.class);
-                noteViewModel.insertNote(note);
-                Toast.makeText(v.getContext(),"Create note successfully",Toast.LENGTH_SHORT).show();
-                dismiss();
+                if (categoryID == 0 || priorityID == 0 || statusID == 0)
+                    Toast.makeText(v.getContext(),"Please choose category, status, priority",Toast.LENGTH_SHORT).show();
+                else {
+                    noteDAO = NoteManagementDatabase.getInstance(v.getContext()).getNoteDAO();
+                    Note note  = new Note(noteName,categoryID,priorityID,statusID,planDate,strCreateDate,userID);
+                    noteViewModel = new ViewModelProvider(getActivity()).get(NoteViewModel.class);
+                    noteViewModel.insertNote(note);
+                    Toast.makeText(v.getContext(),"Create note successfully",Toast.LENGTH_SHORT).show();
+                    dismiss();
+                }
             }
         });
-
+//
         //close
         Button btn_closeStatus = view.findViewById(R.id.btn_closeNote);
         btn_closeStatus.setOnClickListener(new View.OnClickListener() {
@@ -149,6 +153,7 @@ public class Add_dialog_note extends AppCompatDialogFragment  {
         CategoryModel categoryModel = new ViewModelProvider(this).get(CategoryModel.class);
         List<Category> categories = new ArrayList<>();
         categories = categoryModel.getListCategories();
+        categories.add(0,new Category("Select category...","",0));
         final ArrayAdapter arrayAdapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,categories);
         spinner.setAdapter(arrayAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -168,6 +173,7 @@ public class Add_dialog_note extends AppCompatDialogFragment  {
         PriorityModel priorityModel = new ViewModelProvider(this).get(PriorityModel.class);
         List<Priority> priorities = new ArrayList<>();
         priorities = priorityModel.getListPriorityDF();
+        priorities.add(0,new Priority("Select priority...","",0));
         final ArrayAdapter arrayAdapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,priorities);
         spinner1.setAdapter(arrayAdapter);
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -187,6 +193,7 @@ public class Add_dialog_note extends AppCompatDialogFragment  {
         StatusViewModel statusViewModel = new ViewModelProvider(this).get(StatusViewModel.class);
         List<Status> mListStatus = new ArrayList<>();
         mListStatus = statusViewModel.getListStatusDF();
+        mListStatus.add(0,new Status("Select status...","",0));
         final ArrayAdapter arrayAdapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,mListStatus);
         spinner2.setAdapter(arrayAdapter);
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
