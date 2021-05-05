@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.notemanagementsystem.Adapter.StatusAdapter;
 import com.example.notemanagementsystem.Data.NoteManagementDatabase;
 import com.example.notemanagementsystem.Data.StatusDAO;
+import com.example.notemanagementsystem.Model.Priority;
 import com.example.notemanagementsystem.Model.Status;
 import com.example.notemanagementsystem.R;
 
@@ -59,15 +60,18 @@ public class Add_dialog_status extends AppCompatDialogFragment {
                 if(TextUtils.isEmpty(strStatusName)){
                     return;
                 }
-
-                //insert
-                statusDAO = NoteManagementDatabase.getInstance(v.getContext()).getStatusDAO();
-                Status status = new Status(strStatusName,strCreateDate,userID);
-                statusModel = new ViewModelProvider(getActivity()).get(StatusViewModel.class);
-                statusModel.insertStatus(status);
-                Toast.makeText(v.getContext(),"Create status successfully",Toast.LENGTH_SHORT).show();
-                dismiss();
-
+                if(isStatusExist(strStatusName,userID)){
+                    Toast.makeText(v.getContext(),strStatusName +" already exist",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    //insert
+                    statusDAO = NoteManagementDatabase.getInstance(v.getContext()).getStatusDAO();
+                    Status status = new Status(strStatusName,strCreateDate,userID);
+                    statusModel = new ViewModelProvider(getActivity()).get(StatusViewModel.class);
+                    statusModel.insertStatus(status);
+                    Toast.makeText(v.getContext(),"Create status successfully",Toast.LENGTH_SHORT).show();
+                    dismiss();
+                }
             }
         });
 
@@ -82,6 +86,10 @@ public class Add_dialog_status extends AppCompatDialogFragment {
 
         builder.setView(view);
         return builder.create();
+    }
 
+    private boolean isStatusExist(String statusName,int userID){
+        List<Status> statuses = NoteManagementDatabase.getInstance(getActivity()).getStatusDAO().checkStatus(statusName,userID);
+        return statuses != null && !statuses.isEmpty();
     }
 }

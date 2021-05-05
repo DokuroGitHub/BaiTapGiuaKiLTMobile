@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.notemanagementsystem.Adapter.PriorityAdapter;
 import com.example.notemanagementsystem.Data.NoteManagementDatabase;
 import com.example.notemanagementsystem.Data.PriorityDAO;
+import com.example.notemanagementsystem.Model.Category;
 import com.example.notemanagementsystem.Model.Priority;
 import com.example.notemanagementsystem.R;
 
@@ -59,13 +60,17 @@ public class Add_dialog_priority extends AppCompatDialogFragment {
                 if(TextUtils.isEmpty(strPriorityName)){
                     return;
                 }
-                priorityDAO = NoteManagementDatabase.getInstance(v.getContext()).getPriorityDAO();
-                Priority priority = new Priority(strPriorityName,strCreateDate,userID);
-                priorityModel = new ViewModelProvider(getActivity()).get(PriorityModel.class);
-                priorityModel.insertPriority(priority);
-                Toast.makeText(v.getContext(),"Create priority successfully",Toast.LENGTH_SHORT).show();
-                dismiss();
-
+                if(isPriorityExist(strPriorityName,userID)){
+                    Toast.makeText(v.getContext(),strPriorityName +" already exist",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    priorityDAO = NoteManagementDatabase.getInstance(v.getContext()).getPriorityDAO();
+                    Priority priority = new Priority(strPriorityName,strCreateDate,userID);
+                    priorityModel = new ViewModelProvider(getActivity()).get(PriorityModel.class);
+                    priorityModel.insertPriority(priority);
+                    Toast.makeText(v.getContext(),"Create priority successfully",Toast.LENGTH_SHORT).show();
+                    dismiss();
+                }
             }
         });
 
@@ -79,5 +84,10 @@ public class Add_dialog_priority extends AppCompatDialogFragment {
         });
         builder.setView(view);
         return builder.create();
+    }
+
+    private boolean isPriorityExist(String priorityName,int userID){
+        List<Priority> priorities = NoteManagementDatabase.getInstance(getActivity()).getPriorityDAO().checkPriority(priorityName,userID);
+        return priorities != null && !priorities.isEmpty();
     }
 }

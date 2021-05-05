@@ -59,12 +59,18 @@ public class EditCategory extends AppCompatDialogFragment {
                 if(TextUtils.isEmpty(strCategoryName)){
                     return;
                 }
-                categoryDAO = NoteManagementDatabase.getInstance(v.getContext()).getCategoryDAO();
-                categoryModel = new ViewModelProvider(getActivity()).get(CategoryModel.class);
-                category.setCategoryName(strCategoryName);
-                categoryModel.updateCategory(category);
-                Toast.makeText(v.getContext(),"Update category successfully",Toast.LENGTH_SHORT).show();
-                dismiss();
+                if(isCategoryExist(strCategoryName,category.getUserID())){
+                    Toast.makeText(v.getContext(),strCategoryName +" already exist",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    categoryDAO = NoteManagementDatabase.getInstance(v.getContext()).getCategoryDAO();
+                    categoryModel = new ViewModelProvider(getActivity()).get(CategoryModel.class);
+                    category.setCategoryName(strCategoryName);
+                    categoryModel.updateCategory(category);
+                    Toast.makeText(v.getContext(),"Update category successfully",Toast.LENGTH_SHORT).show();
+                    dismiss();
+                }
+
             }
         });
         //close
@@ -78,6 +84,9 @@ public class EditCategory extends AppCompatDialogFragment {
 
         builder.setView(view);
         return builder.create();
-
+    }
+    private boolean isCategoryExist(String categoryName,int userID){
+        List<Category> categories = NoteManagementDatabase.getInstance(getActivity()).getCategoryDAO().checkCategory(categoryName,userID);
+        return categories != null && !categories.isEmpty();
     }
 }

@@ -59,13 +59,17 @@ public class EditPriority extends AppCompatDialogFragment {
                 if(TextUtils.isEmpty(strPriorityName)){
                     return;
                 }
-                priorityDAO = NoteManagementDatabase.getInstance(v.getContext()).getPriorityDAO();
-                priorityModel = new ViewModelProvider(getActivity()).get(PriorityModel.class);
-                priority.setPriorityName(strPriorityName);
-                priorityModel.updatePriority(priority);
-                Toast.makeText(v.getContext(),"Update priority successfully",Toast.LENGTH_SHORT).show();
-                dismiss();
-
+                if(isPriorityExist(strPriorityName,priority.getUserID())){
+                    Toast.makeText(v.getContext(),strPriorityName +" already exist",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    priorityDAO = NoteManagementDatabase.getInstance(v.getContext()).getPriorityDAO();
+                    priorityModel = new ViewModelProvider(getActivity()).get(PriorityModel.class);
+                    priority.setPriorityName(strPriorityName);
+                    priorityModel.updatePriority(priority);
+                    Toast.makeText(v.getContext(),"Update priority successfully",Toast.LENGTH_SHORT).show();
+                    dismiss();
+                }
             }
         });
         //close
@@ -79,6 +83,10 @@ public class EditPriority extends AppCompatDialogFragment {
 
         builder.setView(view);
         return builder.create();
+    }
 
+    private boolean isPriorityExist(String priorityName,int userID){
+        List<Priority> priorities = NoteManagementDatabase.getInstance(getActivity()).getPriorityDAO().checkPriority(priorityName,userID);
+        return priorities != null && !priorities.isEmpty();
     }
 }

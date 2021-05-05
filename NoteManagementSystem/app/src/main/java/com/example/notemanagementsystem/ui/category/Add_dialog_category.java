@@ -63,9 +63,16 @@ public class Add_dialog_category extends AppCompatDialogFragment {
                 categoryDAO = NoteManagementDatabase.getInstance(v.getContext()).getCategoryDAO();
                 Category category = new Category(strCategoryName,strCreateDate,userID);
                 categoryModel = new ViewModelProvider(getActivity()).get(CategoryModel.class);
-                categoryModel.insertCategory(category);
-                Toast.makeText(v.getContext(),"Create category successfully",Toast.LENGTH_SHORT).show();
-                dismiss();
+                //check
+                if(isCategoryExist(category,userID)){
+                    Toast.makeText(v.getContext(),strCategoryName +" already exist",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    categoryModel.insertCategory(category);
+                    Toast.makeText(v.getContext(),"Create category successfully",Toast.LENGTH_SHORT).show();
+                    dismiss();
+                }
+
             }
         });
         //close
@@ -79,5 +86,10 @@ public class Add_dialog_category extends AppCompatDialogFragment {
 
         builder.setView(view);
         return builder.create();
+    }
+
+    private boolean isCategoryExist(Category category,int userID){
+        List<Category> categories = NoteManagementDatabase.getInstance(getActivity()).getCategoryDAO().checkCategory(category.getCategoryName(),userID);
+        return categories != null && !categories.isEmpty();
     }
 }

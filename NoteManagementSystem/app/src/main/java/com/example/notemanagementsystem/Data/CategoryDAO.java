@@ -32,4 +32,7 @@ public interface CategoryDAO {
     @Query("SELECT * FROM Category")
     List<Category> getListCategories();
 
+    @Query("SELECT * FROM category WHERE categoryName= :categoryName AND userID= :userID ")
+    List<Category> checkCategory(String categoryName, int userID);
+
 }

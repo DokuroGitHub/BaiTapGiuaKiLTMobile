@@ -7,6 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.notemanagementsystem.Model.Category;
 import com.example.notemanagementsystem.Model.Status;
 
 
@@ -28,4 +29,7 @@ public interface StatusDAO {
 
     @Query("SELECT * FROM Status where userID = :userID")
     LiveData<List<Status>> getListStatus(int userID);
+
+    @Query("SELECT * FROM status WHERE statusName= :statusName AND userID= :userID ")
+    List<Status> checkStatus(String statusName, int userID);
 }

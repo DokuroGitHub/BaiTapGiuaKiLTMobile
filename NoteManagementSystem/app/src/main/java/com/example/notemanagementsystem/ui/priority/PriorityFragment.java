@@ -69,7 +69,6 @@ public class PriorityFragment extends Fragment implements PriorityAdapter.ClickL
     }
 
     public void getDataFromDB(){
-        DashboardActivity dashboardActivity = new DashboardActivity();
         DashboardActivity activity = (DashboardActivity)getActivity();
         Bundle results = activity.getMyData();
         userID = results.getInt("userID");

@@ -60,12 +60,17 @@ public class EditStatus extends AppCompatDialogFragment {
                 if(TextUtils.isEmpty(strStatusName)){
                     return;
                 }
-                statusDAO = NoteManagementDatabase.getInstance(v.getContext()).getStatusDAO();
-                statusModel = new ViewModelProvider(getActivity()).get(StatusViewModel.class);
-                status.setStatusName(strStatusName);
-                StatusViewModel.updateStatus(status);
-                Toast.makeText(v.getContext(),"Update status successfully",Toast.LENGTH_SHORT).show();
-                dismiss();
+                if(isStatusExist(strStatusName,status.getUserID())){
+                    Toast.makeText(v.getContext(),strStatusName +" already exist",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    statusDAO = NoteManagementDatabase.getInstance(v.getContext()).getStatusDAO();
+                    statusModel = new ViewModelProvider(getActivity()).get(StatusViewModel.class);
+                    status.setStatusName(strStatusName);
+                    StatusViewModel.updateStatus(status);
+                    Toast.makeText(v.getContext(),"Update status successfully",Toast.LENGTH_SHORT).show();
+                    dismiss();
+                }
             }
         });
 
@@ -80,6 +85,10 @@ public class EditStatus extends AppCompatDialogFragment {
 
         builder.setView(view);
         return builder.create();
+    }
 
+    private boolean isStatusExist(String statusName,int userID){
+        List<Status> statuses = NoteManagementDatabase.getInstance(getActivity()).getStatusDAO().checkStatus(statusName,userID);
+        return statuses != null && !statuses.isEmpty();
     }
 }

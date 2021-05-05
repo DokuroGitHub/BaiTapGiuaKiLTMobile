@@ -7,6 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.notemanagementsystem.Model.Category;
 import com.example.notemanagementsystem.Model.Priority;
 
 import java.util.List;
@@ -27,4 +28,7 @@ public interface PriorityDAO {
 
     @Query("SELECT * FROM Priority")
     List<Priority> getListPriorityDF();
+
+    @Query("SELECT * FROM priority WHERE priorityName= :priorityName AND userID= :userID ")
+    List<Priority> checkPriority(String priorityName, int userID);
 }

@@ -70,7 +70,6 @@ public class StatusFragment extends Fragment implements StatusAdapter.ClickListe
     }
 
     public void getDataFromDB(){
-        DashboardActivity dashboardActivity = new DashboardActivity();
         DashboardActivity activity = (DashboardActivity)getActivity();
         Bundle results = activity.getMyData();
         userID = results.getInt("userID");

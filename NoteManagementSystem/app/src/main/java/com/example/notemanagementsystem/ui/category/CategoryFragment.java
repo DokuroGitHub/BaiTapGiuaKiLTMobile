@@ -71,7 +71,6 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.ClickL
     }
 
     public void getDataFromDB(){
-        DashboardActivity dashboardActivity = new DashboardActivity();
         DashboardActivity activity = (DashboardActivity)getActivity();
         Bundle results = activity.getMyData();
         userID = results.getInt("userID");
