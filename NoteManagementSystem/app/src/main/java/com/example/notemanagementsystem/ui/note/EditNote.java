@@ -157,7 +157,7 @@ public class EditNote extends AppCompatDialogFragment  {
     private void categorySpinner(){
         CategoryModel categoryModel = new ViewModelProvider(this).get(CategoryModel.class);
         List<Category> categories = new ArrayList<>();
-        categories = categoryModel.getListCategories();
+        categories = categoryModel.getListCategories(note.getUserID());
         final ArrayAdapter arrayAdapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,categories);
         spinner.setAdapter(arrayAdapter);
         //bind data from note
@@ -179,7 +179,7 @@ public class EditNote extends AppCompatDialogFragment  {
     private void prioritySpinner(){
         PriorityModel priorityModel = new ViewModelProvider(this).get(PriorityModel.class);
         List<Priority> priorities = new ArrayList<>();
-        priorities = priorityModel.getListPriorityDF();
+        priorities = priorityModel.getListPriorityDF(note.getUserID());
         final ArrayAdapter arrayAdapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,priorities);
         spinner1.setAdapter(arrayAdapter);
         //bind data from note
@@ -201,7 +201,7 @@ public class EditNote extends AppCompatDialogFragment  {
     private void statusSpinner(){
         StatusViewModel statusViewModel = new ViewModelProvider(this).get(StatusViewModel.class);
         List<Status> mListStatus = new ArrayList<>();
-        mListStatus = statusViewModel.getListStatusDF();
+        mListStatus = statusViewModel.getListStatusDF(note.getUserID());
         final ArrayAdapter arrayAdapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,mListStatus);
         spinner2.setAdapter(arrayAdapter);
         //bind data from note

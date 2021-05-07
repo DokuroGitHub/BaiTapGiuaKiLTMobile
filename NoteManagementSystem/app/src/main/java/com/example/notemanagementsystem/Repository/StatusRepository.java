@@ -43,7 +43,7 @@ public class StatusRepository {
         });
     }
 
-    public List<Status> getListStatusDF() {
-        return statusDAO.getListStatusDF();
+    public List<Status> getListStatusDF(final int userID) {
+        return statusDAO.getListStatusDF(userID);
     }
 }

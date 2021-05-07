@@ -15,8 +15,8 @@ import java.util.List;
 
 @Dao
 public interface StatusDAO {
-    @Query("SELECT * FROM Status")
-    List<Status> getListStatusDF();
+    @Query("SELECT * FROM Status where userID = :userID")
+    List<Status> getListStatusDF(int userID);
 
     @Insert
     void insert(Status status);

@@ -28,8 +28,8 @@ public class CategoryModel extends AndroidViewModel {
         return categoryRepository.getListCategory(userID);
     }
 
-    public List<Category> getListCategories(){
-        return categoryRepository.getListCategories();
+    public List<Category> getListCategories(final int userID){
+        return categoryRepository.getListCategories(userID);
     }
     public void insertCategory(Category category){
         categoryRepository.insertCategory(category);

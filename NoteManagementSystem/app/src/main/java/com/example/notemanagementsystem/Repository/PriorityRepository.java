@@ -26,8 +26,8 @@ public class PriorityRepository {
         return priorityDAO.getListPriority(userID);
     }
 
-    public List<Priority> getListPriorityDF() {
-        return priorityDAO.getListPriorityDF();
+    public List<Priority> getListPriorityDF(final int userID) {
+        return priorityDAO.getListPriorityDF(userID);
     }
 
     public void insertPriority(final Priority priority){

@@ -152,7 +152,7 @@ public class Add_dialog_note extends AppCompatDialogFragment  {
     private void categorySpinner(){
         CategoryModel categoryModel = new ViewModelProvider(this).get(CategoryModel.class);
         List<Category> categories = new ArrayList<>();
-        categories = categoryModel.getListCategories();
+        categories = categoryModel.getListCategories(userID);
         categories.add(0,new Category("Select category...","",0));
         final ArrayAdapter arrayAdapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,categories);
         spinner.setAdapter(arrayAdapter);
@@ -172,7 +172,7 @@ public class Add_dialog_note extends AppCompatDialogFragment  {
     private void prioritySpinner(){
         PriorityModel priorityModel = new ViewModelProvider(this).get(PriorityModel.class);
         List<Priority> priorities = new ArrayList<>();
-        priorities = priorityModel.getListPriorityDF();
+        priorities = priorityModel.getListPriorityDF(userID);
         priorities.add(0,new Priority("Select priority...","",0));
         final ArrayAdapter arrayAdapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,priorities);
         spinner1.setAdapter(arrayAdapter);
@@ -192,7 +192,7 @@ public class Add_dialog_note extends AppCompatDialogFragment  {
     private void statusSpinner(){
         StatusViewModel statusViewModel = new ViewModelProvider(this).get(StatusViewModel.class);
         List<Status> mListStatus = new ArrayList<>();
-        mListStatus = statusViewModel.getListStatusDF();
+        mListStatus = statusViewModel.getListStatusDF(userID);
         mListStatus.add(0,new Status("Select status...","",0));
         final ArrayAdapter arrayAdapter = new ArrayAdapter<>(getContext(),R.layout.support_simple_spinner_dropdown_item,mListStatus);
         spinner2.setAdapter(arrayAdapter);

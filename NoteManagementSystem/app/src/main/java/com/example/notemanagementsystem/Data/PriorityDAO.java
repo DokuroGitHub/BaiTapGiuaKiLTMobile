@@ -26,8 +26,8 @@ public interface PriorityDAO {
     @Query("SELECT * FROM Priority where userID = :userID")
     LiveData<List<Priority>> getListPriority(int userID);
 
-    @Query("SELECT * FROM Priority")
-    List<Priority> getListPriorityDF();
+    @Query("SELECT * FROM Priority WHERE userID = :userID ")
+    List<Priority> getListPriorityDF(int userID);
 
     @Query("SELECT * FROM priority WHERE priorityName= :priorityName AND userID= :userID ")
     List<Priority> checkPriority(String priorityName, int userID);

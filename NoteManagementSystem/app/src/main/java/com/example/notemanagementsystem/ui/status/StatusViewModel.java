@@ -29,8 +29,8 @@ public class StatusViewModel extends AndroidViewModel {
         return statusRepository.getListStatus(userID);
     }
 
-    public List<Status> getListStatusDF(){
-        return statusRepository.getListStatusDF();
+    public List<Status> getListStatusDF(final int userID){
+        return statusRepository.getListStatusDF(userID);
     }
 
     public void insertStatus(Status status){

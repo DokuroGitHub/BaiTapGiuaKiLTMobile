@@ -28,7 +28,7 @@ public class CategoryRepository {
         return categoryDAO.getListCategory(userID);
     }
 
-    public List<Category> getListCategories(){return categoryDAO.getListCategories();}
+    public List<Category> getListCategories(final int userID){return categoryDAO.getListCategories(userID);}
     public void insertCategory(final Category category) {
         NoteManagementDatabase.databaseWriteExecutor.execute(() -> {
             categoryDAO.insert(category);
