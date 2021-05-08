@@ -11,7 +11,10 @@ import android.widget.Toast;
 
 import com.example.notemanagementsystem.Data.NoteManagementDatabase;
 import com.example.notemanagementsystem.Data.UserDAO;
+import com.example.notemanagementsystem.Model.Category;
 import com.example.notemanagementsystem.Model.User;
+
+import java.util.List;
 
 public class SignUpActivity extends AppCompatActivity {
     private EditText edtEmail, edtPassword, edtConfirmPassword;
@@ -52,14 +55,25 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(SignUpActivity.this,"Please enter all the fields",Toast.LENGTH_SHORT).show();
                 else {
                     if(password.equals(rePassword)){
-                        User user = new User(email,password,"", "");
-                        userDAO.insert(user);
-                        Toast.makeText(SignUpActivity.this,"Create account successfully",Toast.LENGTH_SHORT).show();
+                        if(isUserExist(email)){
+                            Toast.makeText(v.getContext(),email +" already exist",Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            User user = new User(email,password,"", "");
+                            userDAO.insert(user);
+                            Toast.makeText(SignUpActivity.this,"Create account successfully",Toast.LENGTH_SHORT).show();
+                        }
+
                     } else {
                         Toast.makeText(SignUpActivity.this,"Password not matching",Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
+    }
+
+    private boolean isUserExist(String email){
+        List<User> users = NoteManagementDatabase.getInstance(this).getUserDAO().checkUser(email);
+        return users != null && !users.isEmpty();
     }
 }

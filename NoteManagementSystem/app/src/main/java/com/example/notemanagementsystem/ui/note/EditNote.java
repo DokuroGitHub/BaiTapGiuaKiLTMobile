@@ -117,6 +117,7 @@ public class EditNote extends AppCompatDialogFragment  {
                 note.setCategoryID(categoryID);
                 note.setPriorityID(priorityID);
                 note.setStatusID(statusID);
+                note.setPlantDate(planDate);
                 noteViewModel.updateNote(note);
                 Toast.makeText(v.getContext(),"Update note successfully",Toast.LENGTH_SHORT).show();
                 dismiss();

@@ -5,6 +5,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.notemanagementsystem.Model.Category;
 import com.example.notemanagementsystem.Model.User;
 
 import java.util.List;
@@ -15,10 +16,11 @@ public interface UserDAO {
     @Query("SELECT * FROM User WHERE email = :email and password = :password")
     User getUser(String email, String password);
 
-    //
     @Query("SELECT * FROM User WHERE email = :email")
     User getUserWithOutPass(String email);
-    //
+
+    @Query("SELECT * FROM User WHERE email =  :email")
+    List<User> checkUser(String email);
 
     @Insert
     void insert(User user);
